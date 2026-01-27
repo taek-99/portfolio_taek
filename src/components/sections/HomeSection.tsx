@@ -61,16 +61,13 @@ export function SectionHome() {
           <div className="w-64 h-64 rounded-full bg-gray-200" />
 
           <p className="mt-4 text-3xl font-semibold tracking-wide">
-            신건하 <span className="text-lg text-gray-500 tracking-wide">Taek</span>
+            신건하 <span className="text-lg text-gray-500 tracking-wide">Taek-99</span>
           </p>
 
           <p className="text-lg text-gray-500 tracking-wide">
             I'm tring to get better
           </p>
         </div>
-
-
-
 
       </div>
     </section>
