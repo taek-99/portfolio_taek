@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TechItem } from "@/components/TechStackIcon"
+import { TechItem } from "../TechStackIcon"
 
 export function SectionAbout() {
   return (
