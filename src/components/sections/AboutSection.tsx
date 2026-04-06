@@ -15,6 +15,8 @@ type SkillGroup = {
   skills: Skill[];
 };
 
+type AboutPage = "Tech Stack" | "Awards" | "Licence" | "Education";
+
 const skillGroups: SkillGroup[] = [
   {
     title: "Language",
@@ -127,6 +129,8 @@ const skillGroups: SkillGroup[] = [
   },
 ];
 
+const aboutPages: AboutPage[] = ["Tech Stack", "Awards", "Licence", "Education"];
+
 function SkillBar({
   skill,
   isVisible,
@@ -175,10 +179,13 @@ function SkillBar({
 export function SectionAbout() {
   const stackRef = useRef<HTMLDivElement | null>(null);
   const [animateBars, setAnimateBars] = useState(false);
+  const [activePage, setActivePage] = useState<AboutPage>("Tech Stack");
+
+  const activePageIndex = aboutPages.indexOf(activePage);
 
   useEffect(() => {
     const node = stackRef.current;
-    if (!node || animateBars) {
+    if (!node || animateBars || activePage !== "Tech Stack") {
       return;
     }
 
@@ -200,7 +207,7 @@ export function SectionAbout() {
     observer.observe(node);
 
     return () => observer.disconnect();
-  }, [animateBars]);
+  }, [activePage, animateBars]);
 
   let skillIndex = 0;
 
@@ -214,61 +221,85 @@ export function SectionAbout() {
           <h1 className="text-4xl font-bold text-black md:text-5xl">About Me</h1>
         </div>
 
-        <div ref={stackRef} className="mt-12">
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-black">Tech Stack</h2>
+        <div className="mt-12 rounded-[32px] border border-gray-200 bg-[#fcfcfa] p-6 md:p-8">
+          <div className="flex flex-col gap-6 border-b border-gray-200 pb-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold text-black">{activePage}</h2>
+
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {aboutPages.map((page) => {
+                const isActive = page === activePage;
+
+                return (
+                  <button
+                    key={page}
+                    type="button"
+                    onClick={() => setActivePage(page)}
+                    className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+                      isActive
+                        ? "border-black bg-black text-white"
+                        : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:text-black"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="space-y-10">
-            {skillGroups.map((group) => (
-              <div key={group.title} className="space-y-4">
-                <h3 className="text-xl font-semibold text-black">{group.title}</h3>
+          <div className="pt-8">
+            {activePage === "Tech Stack" && (
+              <div ref={stackRef} className="space-y-10">
+                {skillGroups.map((group) => (
+                  <div key={group.title} className="space-y-4">
+                    <h3 className="text-xl font-semibold text-black">{group.title}</h3>
 
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                  {group.skills.map((skill) => {
-                    const currentIndex = skillIndex;
-                    skillIndex += 1;
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                      {group.skills.map((skill) => {
+                        const currentIndex = skillIndex;
+                        skillIndex += 1;
 
-                    return (
-                      <SkillBar
-                        key={skill.name}
-                        skill={skill}
-                        isVisible={animateBars}
-                        index={currentIndex}
-                      />
-                    );
-                  })}
-                </div>
+                        return (
+                          <SkillBar
+                            key={skill.name}
+                            skill={skill}
+                            isVisible={animateBars}
+                            index={currentIndex}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            )}
 
-        <div className="mt-16 grid gap-10 md:grid-cols-3">
-          <div>
-            <h2 className="mb-4 text-2xl font-semibold">Awards</h2>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>SSAFY 14기 특화 프로젝트 서울 7반 1위</li>
-              <li>2017 전국 기능경기대회 1위</li>
-            </ul>
+            {activePage === "Awards" && (
+              <ul className="list-disc list-inside space-y-3 text-lg text-gray-600">
+                <li>SSAFY 14기 특화 프로젝트 서울 7반 1위</li>
+                <li>2017 전국 기능경기대회 1위</li>
+              </ul>
+            )}
+
+            {activePage === "Licence" && (
+              <ul className="list-disc list-inside space-y-3 text-lg text-gray-600">
+                <li>OPIC (IL)</li>
+                <li>컴퓨터활용능력 1급</li>
+                <li>전자기기 기능사</li>
+              </ul>
+            )}
+
+            {activePage === "Education" && (
+              <ul className="list-disc list-inside space-y-3 text-lg text-gray-600">
+                <li>Samsung Software AI Academy For Youth (SSAFY)</li>
+                <li>충북반도체고등학교 반도체 전공</li>
+              </ul>
+            )}
           </div>
 
-          <div>
-            <h2 className="mb-4 text-2xl font-semibold">Licence</h2>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>OPIC (IL)</li>
-              <li>컴퓨터활용능력 1급</li>
-              <li>전자기기 기능사</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="mb-4 text-2xl font-semibold">Education</h2>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Samsung Software AI Academy For Youth (SSAFY)</li>
-              <li>충북반도체고등학교 반도체 전공</li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>

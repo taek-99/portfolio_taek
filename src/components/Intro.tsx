@@ -43,7 +43,7 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
         isFadingOut ? "opacity-0" : "opacity-100"
       }`}
     >
-      <h1 className="text-white text-5xl font-semibold tracking-wide">
+      <h1 className="text-white text-6xl font-semibold tracking-wide md:text-7xl">
         {displayed}
       </h1>
     </div>
