@@ -14,7 +14,7 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
       i++;
       if (i === TEXT.length) {
         clearInterval(interval);
-        setTimeout(() => onDone?.(), 1000); // 타이핑 끝난 뒤
+        setTimeout(() => onDone?.(), 1000);
       }
     }, 100);
 

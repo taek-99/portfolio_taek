@@ -1,6 +1,5 @@
 
 
-
 export function SectionHome() {
   return (
     <section
@@ -19,19 +18,17 @@ export function SectionHome() {
 
           <p className="text-gray-600 text-lg leading-relaxed">
             사용자 경험을 중심으로 설계하고,<br />
-            복잡한 요구사항을 명확한 구조로 구현하는 것을 좋아합니다.
+            복잡한 요구사항도 명확한 구조로 구현하는 것을 좋아합니다.
           </p>
 
-          {/* 핵심 포인트 */}
           <ul className="space-y-2 text-gray-700">
             <li>• React / Next.js 기반 서비스 개발</li>
-            <li>• 접근성과 UX를 고려한 인터페이스</li>
+            <li>• 접근성과 UX를 고려한 인터페이스 설계</li>
             <li>• 음성(STT/TTS) 기반 인터랙션 경험</li>
-            <li>• ThreeJs를 활용한 3D마네킹 인터랙션 경험</li>
+            <li>• Three.js를 활용한 3D 인터랙션 경험</li>
           </ul>
 
-          {/* CTA */}
-            <div className="flex gap-4 mt-4">
+          <div className="flex gap-4 mt-4">
             <a
               href="#about"
               className="inline-block px-6 py-3 border border-black text-black hover:bg-black hover:text-white transition"
@@ -65,7 +62,7 @@ export function SectionHome() {
           </p>
 
           <p className="text-lg text-gray-500 tracking-wide">
-            I'm tring to get better
+            I&apos;m trying to get better
           </p>
         </div>
 

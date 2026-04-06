@@ -3,7 +3,7 @@
 import { useForm, ValidationError } from "@formspree/react";
 
 export function SectionContact() {
-  const [state, handleSubmit] = useForm("xdagwkbq"); // ⬅️ 네 Form ID
+  const [state, handleSubmit] = useForm("xdagwkbq");
 
   if (state.succeeded) {
     return (
@@ -14,7 +14,7 @@ export function SectionContact() {
         <div className="max-w-4xl mx-auto px-6 w-full text-center">
           <h1 className="text-4xl font-bold mb-4">Contact</h1>
           <p className="text-gray-400">
-            메시지가 성공적으로 전송되었습니다. 감사합니다!
+            메시지가 성공적으로 전송되었습니다. 감사합니다.
           </p>
         </div>
       </section>
@@ -30,7 +30,6 @@ export function SectionContact() {
         <h1 className="text-4xl font-bold mb-12">Contact</h1>
 
         <form onSubmit={handleSubmit} className="max-w-xl space-y-6">
-          {/* NAME */}
           <div>
             <label className="block mb-2 text-sm text-gray-400">
               Name
@@ -42,7 +41,6 @@ export function SectionContact() {
             />
           </div>
 
-          {/* EMAIL */}
           <div>
             <label className="block mb-2 text-sm text-gray-400">
               Email
@@ -60,7 +58,6 @@ export function SectionContact() {
             />
           </div>
 
-          {/* MESSAGE */}
           <div>
             <label className="block mb-2 text-sm text-gray-400">
               Message
@@ -78,7 +75,6 @@ export function SectionContact() {
             />
           </div>
 
-          {/* SUBMIT */}
           <button
             type="submit"
             disabled={state.submitting}

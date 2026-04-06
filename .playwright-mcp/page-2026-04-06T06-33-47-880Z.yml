@@ -1,0 +1,443 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e6]:
+      - link "Park Eunji" [ref=e8] [cursor=pointer]:
+        - /url: /portfolio
+      - navigation [ref=e9]:
+        - link "< About />" [ref=e10] [cursor=pointer]:
+          - /url: "#about"
+        - link "< Skills />" [ref=e11] [cursor=pointer]:
+          - /url: "#skills"
+        - link "< Projects />" [ref=e12] [cursor=pointer]:
+          - /url: "#projects"
+        - link "< Contact />" [ref=e13] [cursor=pointer]:
+          - /url: "#contact"
+    - img [ref=e15]
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - generic: "|"
+          - paragraph [ref=e22]: 저는 수학 문제 푸는 것을 좋아해서 수학과 전공을 선택하였습니다.
+          - paragraph [ref=e23]: 복수전공을 시작하면서 수학과 비슷한 매력을 가진 코딩에 흥미가 생겼고,
+          - paragraph [ref=e24]: 마크업 언어에 대한 호기심에 혼자서 관련 영상과 서적을 찾아 이것저것 시도해보면서
+          - paragraph [ref=e25]: 자연스럽게 프론트엔드 개발자를 꿈꾸게 되었습니다.
+          - paragraph [ref=e26]: 수많은 도전과 경험을 통해 다양한 기술 스택을 쌓아
+          - paragraph [ref=e27]: 적재적소에 알맞은 기술을 적용하여 최고의 UX를 제공할 수 있는
+          - paragraph [ref=e28]: 프론트엔드 개발자가 되고 싶습니다.
+        - generic [ref=e29]:
+          - heading "ABOUT" [level=2] [ref=e30]
+          - generic [ref=e33]:
+            - list [ref=e34]:
+              - listitem [ref=e35]:
+                - img [ref=e36]
+                - generic [ref=e38]: 박은지
+              - listitem [ref=e39]:
+                - img [ref=e40]
+                - generic [ref=e42]: 1999. 03. 15
+              - listitem [ref=e43]:
+                - img [ref=e44]
+                - generic [ref=e46]: 경기도 과천시
+              - listitem [ref=e47]:
+                - img [ref=e48]
+                - generic [ref=e50]: savinpark0315@gmail.com
+              - listitem [ref=e51]:
+                - img [ref=e52]
+                - generic [ref=e54]: 경기대학교 ( 수학과, 융합데이터공학부 )
+            - list [ref=e55]:
+              - listitem [ref=e56]:
+                - link "Git" [ref=e57] [cursor=pointer]:
+                  - /url: https://github.com/SavinPark
+                  - img [ref=e58]
+                  - text: Git
+              - listitem [ref=e60]:
+                - link "BLOG" [ref=e61] [cursor=pointer]:
+                  - /url: https://velog.io/@savinpark
+                  - img [ref=e62]
+                  - text: BLOG
+      - generic [ref=e64]:
+        - heading "Main Skills" [level=2] [ref=e65]
+        - list [ref=e66]:
+          - listitem [ref=e67]:
+            - generic [ref=e68]: HTML5
+            - generic [ref=e72]: 80 %
+          - listitem [ref=e73]:
+            - generic [ref=e74]: CSS3
+            - generic [ref=e78]: 80 %
+          - listitem [ref=e79]:
+            - generic [ref=e80]: JavaScript
+            - generic [ref=e84]: 70 %
+          - listitem [ref=e85]:
+            - generic [ref=e86]: jQuery
+            - generic [ref=e90]: 50 %
+          - listitem [ref=e91]:
+            - generic [ref=e92]: React
+            - generic [ref=e96]: 70 %
+          - listitem [ref=e97]:
+            - generic [ref=e98]: TypeScript
+            - generic [ref=e102]: 30 %
+          - listitem [ref=e103]:
+            - generic [ref=e104]: Next.js
+            - generic [ref=e108]: 30 %
+          - listitem [ref=e109]:
+            - generic [ref=e110]: SCSS
+            - generic [ref=e114]: 60 %
+          - listitem [ref=e115]:
+            - generic [ref=e116]: Bootstrap
+            - generic [ref=e120]: 70 %
+          - listitem [ref=e121]:
+            - generic [ref=e122]: Semantic UI
+            - generic [ref=e126]: 70 %
+          - listitem [ref=e127]:
+            - generic [ref=e128]: Figma
+            - generic [ref=e132]: 70 %
+          - listitem [ref=e133]:
+            - generic [ref=e134]: MySQL
+            - generic [ref=e138]: 30 %
+          - listitem [ref=e139]:
+            - generic [ref=e140]: Github
+            - generic [ref=e144]: 40 %
+      - generic [ref=e145]:
+        - heading "PROJECTS" [level=2] [ref=e146]
+        - button "Flip All >" [ref=e148] [cursor=pointer]
+        - generic [ref=e149]:
+          - generic [ref=e153] [cursor=pointer]:
+            - heading "Coupang-Discovery" [level=3] [ref=e154]
+            - paragraph [ref=e156]: 쿠팡 웹페이지의 <오늘의 발견> 영역을 마크업한 결과물입니다.
+            - generic [ref=e157]:
+              - heading "# Period" [level=4] [ref=e158]
+              - paragraph [ref=e159]: 2022.05.12 ~ 2022.05.14
+            - generic [ref=e160]:
+              - heading "# Tech" [level=4] [ref=e161]
+              - list [ref=e162]:
+                - listitem [ref=e163]: HTML5
+                - listitem [ref=e164]: CSS3
+            - generic [ref=e165]:
+              - heading "# My Work" [level=4] [ref=e166]
+              - list [ref=e167]:
+                - listitem [ref=e168]:
+                  - img [ref=e169]
+                  - text: HTML 마크업
+                - listitem [ref=e171]:
+                  - img [ref=e172]
+                  - text: CSS 스타일링
+            - generic [ref=e174]:
+              - link "Source Code" [ref=e175]:
+                - /url: https://github.com/SavinPark/coupang-discovery
+                - button "Source Code" [ref=e176]
+              - link "Demo" [ref=e177]:
+                - /url: https://savinpark.github.io/coupang-discovery/
+                - button "Demo" [ref=e178]
+          - generic [ref=e182] [cursor=pointer]:
+            - heading "Coupang-Offer" [level=3] [ref=e183]
+            - paragraph [ref=e185]: 쿠팡 웹페이지의 <오늘의 쇼핑 제안> 영역을 마크업한 결과물입니다.
+            - generic [ref=e186]:
+              - heading "# Period" [level=4] [ref=e187]
+              - paragraph [ref=e188]: 2022.05.12 ~ 2022.05.14
+            - generic [ref=e189]:
+              - heading "# Tech" [level=4] [ref=e190]
+              - list [ref=e191]:
+                - listitem [ref=e192]: HTML5
+                - listitem [ref=e193]: CSS3
+            - generic [ref=e194]:
+              - heading "# My Work" [level=4] [ref=e195]
+              - list [ref=e196]:
+                - listitem [ref=e197]:
+                  - img [ref=e198]
+                  - text: HTML 마크업
+                - listitem [ref=e200]:
+                  - img [ref=e201]
+                  - text: CSS 스타일링
+            - generic [ref=e203]:
+              - link "Source Code" [ref=e204]:
+                - /url: https://github.com/SavinPark/coupang-offer
+                - button "Source Code" [ref=e205]
+              - link "Demo" [ref=e206]:
+                - /url: https://savinpark.github.io/coupang-offer/
+                - button "Demo" [ref=e207]
+          - generic [ref=e211] [cursor=pointer]:
+            - heading "Coupang-Category Best" [level=3] [ref=e212]
+            - paragraph [ref=e214]: 쿠팡 웹페이지의 <카테고리별 추천 광고상품> 영역을 마크업한 결과물입니다.
+            - generic [ref=e215]:
+              - heading "# Period" [level=4] [ref=e216]
+              - paragraph [ref=e217]: 2022.05.12 ~ 2022.05.14
+            - generic [ref=e218]:
+              - heading "# Tech" [level=4] [ref=e219]
+              - list [ref=e220]:
+                - listitem [ref=e221]: HTML5
+                - listitem [ref=e222]: CSS3
+            - generic [ref=e223]:
+              - heading "# My Work" [level=4] [ref=e224]
+              - list [ref=e225]:
+                - listitem [ref=e226]:
+                  - img [ref=e227]
+                  - text: HTML 마크업
+                - listitem [ref=e229]:
+                  - img [ref=e230]
+                  - text: CSS 스타일링
+            - generic [ref=e232]:
+              - link "Source Code" [ref=e233]:
+                - /url: https://github.com/SavinPark/coupang-categoryBest
+                - button "Source Code" [ref=e234]
+              - link "Demo" [ref=e235]:
+                - /url: https://savinpark.github.io/coupang-categoryBest/
+                - button "Demo" [ref=e236]
+          - generic [ref=e240] [cursor=pointer]:
+            - heading "Coupang-Header" [level=3] [ref=e241]
+            - paragraph [ref=e243]: 쿠팡 웹페이지의 <헤더> 영역을 마크업한 결과물입니다.
+            - generic [ref=e244]:
+              - heading "# Period" [level=4] [ref=e245]
+              - paragraph [ref=e246]: 2022.05.12 ~ 2022.05.14
+            - generic [ref=e247]:
+              - heading "# Tech" [level=4] [ref=e248]
+              - list [ref=e249]:
+                - listitem [ref=e250]: HTML5
+                - listitem [ref=e251]: CSS3
+                - listitem [ref=e252]: JavaScript
+            - generic [ref=e253]:
+              - heading "# My Work" [level=4] [ref=e254]
+              - list [ref=e255]:
+                - listitem [ref=e256]:
+                  - img [ref=e257]
+                  - text: HTML 마크업
+                - listitem [ref=e259]:
+                  - img [ref=e260]
+                  - text: CSS 스타일링
+            - generic [ref=e262]:
+              - link "Source Code" [ref=e263]:
+                - /url: https://github.com/SavinPark/coupang-header
+                - button "Source Code" [ref=e264]
+              - link "Demo" [ref=e265]:
+                - /url: https://savinpark.github.io/coupang-header/
+                - button "Demo" [ref=e266]
+          - generic [ref=e270] [cursor=pointer]:
+            - heading "Coupang-Nav & Footer" [level=3] [ref=e271]
+            - paragraph [ref=e273]: 쿠팡 웹페이지의 <네비게이션>과 <푸터> 영역을 마크업한 결과물입니다.
+            - generic [ref=e274]:
+              - heading "# Period" [level=4] [ref=e275]
+              - paragraph [ref=e276]: 2022.05.12 ~ 2022.05.14
+            - generic [ref=e277]:
+              - heading "# Tech" [level=4] [ref=e278]
+              - list [ref=e279]:
+                - listitem [ref=e280]: HTML5
+                - listitem [ref=e281]: CSS3
+                - listitem [ref=e282]: JavaScript
+                - listitem [ref=e283]: Iconfont
+            - generic [ref=e284]:
+              - heading "# My Work" [level=4] [ref=e285]
+              - list [ref=e286]:
+                - listitem [ref=e287]:
+                  - img [ref=e288]
+                  - text: HTML 마크업
+                - listitem [ref=e290]:
+                  - img [ref=e291]
+                  - text: CSS 스타일링
+            - generic [ref=e293]:
+              - link "Source Code" [ref=e294]:
+                - /url: https://github.com/SavinPark/coupang-navigationFooter
+                - button "Source Code" [ref=e295]
+              - link "Demo" [ref=e296]:
+                - /url: https://savinpark.github.io/coupang-navigationFooter/
+                - button "Demo" [ref=e297]
+          - generic [ref=e301] [cursor=pointer]:
+            - heading "DatePicker & Calender" [level=3] [ref=e302]
+            - paragraph [ref=e304]: 재사용 가능하도록 ES Module을 활용하여 구현한 커스텀 DatePick와 Calender입니다.
+            - generic [ref=e305]:
+              - heading "# Period" [level=4] [ref=e306]
+              - paragraph [ref=e307]: 2022.06.09 ~ 2022.06.12
+            - generic [ref=e308]:
+              - heading "# Tech" [level=4] [ref=e309]
+              - list [ref=e310]:
+                - listitem [ref=e311]: HTML5
+                - listitem [ref=e312]: CSS3
+                - listitem [ref=e313]: JavaScript
+            - generic [ref=e314]:
+              - heading "# My Work" [level=4] [ref=e315]
+              - list [ref=e316]:
+                - listitem [ref=e317]:
+                  - img [ref=e318]
+                  - text: HTML 마크업
+                - listitem [ref=e320]:
+                  - img [ref=e321]
+                  - text: CSS 스타일링
+                - listitem [ref=e323]:
+                  - img [ref=e324]
+                  - text: JavaScript 모듈화 및 기능 구현
+            - generic [ref=e326]:
+              - link "Source Code" [ref=e327]:
+                - /url: https://github.com/SavinPark/Calendar-and-DatePicker/
+                - button "Source Code" [ref=e328]
+              - link "Demo" [ref=e329]:
+                - /url: https://savinpark.github.io/Calendar-and-DatePicker/
+                - button "Demo" [ref=e330]
+          - generic [ref=e334] [cursor=pointer]:
+            - heading "Infinite News Viewer" [level=3] [ref=e335]
+            - paragraph [ref=e337]: "News API를 활용하여 구현한 무한 스크롤 뉴스 뷰어입니다. [참고: 본 프로젝트는 무로 apikey를 사용하였습니다. News API 정책 변경으로 무료 apikey는 localhost에서만 작동합니다.]"
+            - generic [ref=e338]:
+              - heading "# Period" [level=4] [ref=e339]
+              - paragraph [ref=e340]: 2022.06.13 ~ 2022.06.15
+            - generic [ref=e341]:
+              - heading "# Tech" [level=4] [ref=e342]
+              - list [ref=e343]:
+                - listitem [ref=e344]: HTML5
+                - listitem [ref=e345]: CSS3
+                - listitem [ref=e346]: JavaScript
+                - listitem [ref=e347]: Event delegation
+                - listitem [ref=e348]: Intersection Observer API
+                - listitem [ref=e349]: Proxy
+                - listitem [ref=e350]: Observer Pattern
+            - generic [ref=e351]:
+              - heading "# My Work" [level=4] [ref=e352]
+              - list [ref=e353]:
+                - listitem [ref=e354]:
+                  - img [ref=e355]
+                  - text: Component 구현
+                - listitem [ref=e357]:
+                  - img [ref=e358]
+                  - text: News API 연동
+                - listitem [ref=e360]:
+                  - img [ref=e361]
+                  - text: Infinite Scroll 구현
+            - generic [ref=e363]:
+              - link "Source Code" [ref=e364]:
+                - /url: https://github.com/SavinPark/infiniteScroll-newsViewer
+                - button "Source Code" [ref=e365]
+              - link "Demo" [ref=e366]:
+                - /url: https://savinpark.github.io/infiniteScroll-newsViewer/
+                - button "Demo" [ref=e367]
+          - generic [ref=e371] [cursor=pointer]:
+            - heading "Weahter" [level=3] [ref=e372]
+            - paragraph [ref=e374]: Openweathermap API를 활용 구현한 실시간 날씨 정보를 제공하는 웹페이지입니다.
+            - generic [ref=e375]:
+              - heading "# Period" [level=4] [ref=e376]
+              - paragraph [ref=e377]: 2022.06.05 ~ 2022.06.30
+            - generic [ref=e378]:
+              - heading "# Tech" [level=4] [ref=e379]
+              - list [ref=e380]:
+                - listitem [ref=e381]: Scss
+                - listitem [ref=e382]: React
+                - listitem [ref=e383]: react hook
+                - listitem [ref=e384]: router
+                - listitem [ref=e385]: axois
+            - generic [ref=e386]:
+              - heading "# My Work" [level=4] [ref=e387]
+              - list [ref=e388]:
+                - listitem [ref=e389]:
+                  - img [ref=e390]
+                  - text: Design
+                - listitem [ref=e392]:
+                  - img [ref=e393]
+                  - text: Frontend
+            - generic [ref=e395]:
+              - link "Source Code" [ref=e396]:
+                - /url: https://github.com/SavinPark/weather--react
+                - button "Source Code" [ref=e397]
+              - link "Demo" [ref=e398]:
+                - /url: https://savinpark.github.io/weather--react/
+                - button "Demo" [ref=e399]
+          - generic [ref=e403] [cursor=pointer]:
+            - heading "Eat Healthy" [level=3] [ref=e404]
+            - paragraph [ref=e406]: 식단 영양 정보 분석 & 레시피 검색 및 관리 기능을 제공하는 웹서비스입니다.
+            - generic [ref=e407]:
+              - heading "# Period" [level=4] [ref=e408]
+              - paragraph [ref=e409]: 2022.06.05 ~ 2022.06.30
+            - generic [ref=e410]:
+              - heading "# Tech" [level=4] [ref=e411]
+              - list [ref=e412]:
+                - listitem [ref=e413]: Scss
+                - listitem [ref=e414]: React
+                - listitem [ref=e415]: react hook
+                - listitem [ref=e416]: router
+                - listitem [ref=e417]: axois
+            - generic [ref=e418]:
+              - heading "# My Work" [level=4] [ref=e419]
+              - list [ref=e420]:
+                - listitem [ref=e421]:
+                  - img [ref=e422]
+                  - text: Design
+                - listitem [ref=e424]:
+                  - img [ref=e425]
+                  - text: Frontend
+            - generic [ref=e427]:
+              - link "Source Code" [ref=e428]:
+                - /url: https://github.com/SavinPark/Eat-Healthy
+                - button "Source Code" [ref=e429]
+              - link "Demo" [ref=e430]:
+                - /url: https://savinpark.github.io/Eat-Healthy/
+                - button "Demo" [ref=e431]
+          - generic [ref=e435] [cursor=pointer]:
+            - heading "MRS" [level=3] [ref=e436]
+            - paragraph [ref=e438]: 인턴 기간 과제 프로젝트로 작업한 사내 유지보수 보고서 관리 프로그램입니다.
+            - generic [ref=e439]:
+              - heading "# Period" [level=4] [ref=e440]
+              - paragraph [ref=e441]: 2022.02.07 ~ 2022.03.30
+            - generic [ref=e442]:
+              - heading "# Tech" [level=4] [ref=e443]
+              - list [ref=e444]:
+                - listitem [ref=e445]: MySQL
+                - listitem [ref=e446]: Java
+                - listitem [ref=e447]: Spring
+                - listitem [ref=e448]: JSP
+                - listitem [ref=e449]: MyBatis
+                - listitem [ref=e450]: Bootstrap
+            - generic [ref=e451]:
+              - heading "# My Work" [level=4] [ref=e452]
+              - list [ref=e453]:
+                - listitem [ref=e454]:
+                  - img [ref=e455]
+                  - text: 데이터베이스 설계 및 구축
+                - listitem [ref=e457]:
+                  - img [ref=e458]
+                  - text: MVC 구조의 Backend 구현
+                - listitem [ref=e460]:
+                  - img [ref=e461]
+                  - text: Bootstrap을 활용한 Frontend 구현
+            - generic [ref=e463]:
+              - link "Source Code" [ref=e464]:
+                - /url: https://github.com/SavinPark/MRS
+                - button "Source Code" [ref=e465]
+              - link "Demo" [ref=e466]:
+                - /url: "#projects"
+                - button "Demo" [ref=e467]
+          - generic [ref=e471] [cursor=pointer]:
+            - heading "Portfolio" [level=3] [ref=e472]
+            - paragraph [ref=e474]: 개인 포트폴리오 웹페이지 입니다.
+            - generic [ref=e475]:
+              - heading "# Period" [level=4] [ref=e476]
+              - paragraph [ref=e477]: 2022.06.28 ~ 2022.07.01
+            - generic [ref=e478]:
+              - heading "# Tech" [level=4] [ref=e479]
+              - list [ref=e480]:
+                - listitem [ref=e481]: Scss
+                - listitem [ref=e482]: styled-component
+                - listitem [ref=e483]: React
+                - listitem [ref=e484]: react hook
+            - generic [ref=e485]:
+              - heading "# My Work" [level=4] [ref=e486]
+              - list [ref=e487]:
+                - listitem [ref=e488]:
+                  - img [ref=e489]
+                  - text: Design
+                - listitem [ref=e491]:
+                  - img [ref=e492]
+                  - text: Frontend
+            - generic [ref=e494]:
+              - link "Source Code" [ref=e495]:
+                - /url: https://github.com/SavinPark/portfolio
+                - button "Source Code" [ref=e496]
+              - link "Demo" [ref=e497]:
+                - /url: https://savinpark.github.io/portfolio/
+                - button "Demo" [ref=e498]
+      - generic [ref=e499]:
+        - generic [ref=e500]:
+          - heading "CONTACT ✉" [level=2] [ref=e501]
+          - paragraph [ref=e502]: "Thank you : )"
+        - generic [ref=e505]:
+          - textbox "Name" [ref=e506]
+          - textbox "Title" [ref=e507]
+          - textbox "Message" [ref=e508]
+          - button "SEND" [ref=e509] [cursor=pointer]
+  - contentinfo [ref=e510]:
+    - img [ref=e512]
+    - generic [ref=e515]: Copyright 2022. Web Front-end developer portfolio-- by Eunji Park 💗
