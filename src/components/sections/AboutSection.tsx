@@ -1,109 +1,275 @@
-import { TechItem } from "../TechStackIcon";
+"use client";
+
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+
+type Skill = {
+  name: string;
+  level: number;
+  description: string;
+  iconSrc: string;
+};
+
+type SkillGroup = {
+  title: string;
+  skills: Skill[];
+};
+
+const skillGroups: SkillGroup[] = [
+  {
+    title: "Language",
+    skills: [
+      {
+        name: "JavaScript",
+        level: 78,
+        iconSrc: "/techstack/JavaScript.svg",
+        description:
+          "Vue 기반 프로젝트에서 지도, 추천 결과, 페이지 흐름을 직접 구현했습니다.",
+      },
+      {
+        name: "TypeScript",
+        level: 86,
+        iconSrc: "/techstack/TypeScript.svg",
+        description:
+          "헤어때와 See:Sun에서 타입 안정성을 기반으로 기능 구조를 정리했습니다.",
+      },
+      {
+        name: "Python",
+        level: 64,
+        iconSrc: "/techstack/Python.svg",
+        description:
+          "AI 및 백엔드 협업 맥락에서 데이터 흐름과 기능 연동을 이해하며 활용했습니다.",
+      },
+    ],
+  },
+  {
+    title: "Framework",
+    skills: [
+      {
+        name: "Next.js",
+        level: 82,
+        iconSrc: "/techstack/NextJS.svg",
+        description:
+          "서비스형 UI 구성과 음성 기반 인터랙션 프로젝트를 구현하며 활용했습니다.",
+      },
+      {
+        name: "Vue",
+        level: 78,
+        iconSrc: "/techstack/Vue.svg",
+        description:
+          "응급실 추천 서비스에서 탐색 흐름과 상세 UI를 직접 구현했습니다.",
+      },
+      {
+        name: "Django",
+        level: 58,
+        iconSrc: "/techstack/Django.svg",
+        description:
+          "프론트엔드 중심 프로젝트에서 API 연동과 서비스 구조를 이해하는 기반으로 다뤘습니다.",
+      },
+    ],
+  },
+  {
+    title: "Library",
+    skills: [
+      {
+        name: "React",
+        level: 90,
+        iconSrc: "/techstack/React.svg",
+        description:
+          "사용자 흐름 중심 화면 설계와 상태 기반 인터랙션 구현에 가장 익숙합니다.",
+      },
+      {
+        name: "Three.js",
+        level: 70,
+        iconSrc: "/techstack/ThreeJS.svg",
+        description:
+          "Raycasting 기반 3D 신체 부위 선택 인터랙션과 시각적 피드백을 구현했습니다.",
+      },
+    ],
+  },
+  {
+    title: "Styling",
+    skills: [
+      {
+        name: "Tailwind CSS",
+        level: 88,
+        iconSrc: "/techstack/TailwindCSS.svg",
+        description:
+          "빠른 화면 구성과 일관된 디자인 시스템 정리에 익숙합니다.",
+      },
+    ],
+  },
+  {
+    title: "Infra & Collaboration",
+    skills: [
+      {
+        name: "Docker",
+        level: 60,
+        iconSrc: "/techstack/Docker.svg",
+        description:
+          "개발 환경을 맞추고 서비스 실행 흐름을 안정적으로 공유하는 데 활용했습니다.",
+      },
+      {
+        name: "AWS",
+        level: 55,
+        iconSrc: "/techstack/AWS-Dark.svg",
+        description:
+          "배포 및 인프라 구조를 이해하고 프로젝트 운영 흐름을 파악하는 데 사용했습니다.",
+      },
+      {
+        name: "Figma",
+        level: 72,
+        iconSrc: "/techstack/Figma.svg",
+        description:
+          "기획과 디자인 의도를 화면 구조로 옮기기 위한 협업 도구로 익숙하게 사용했습니다.",
+      },
+    ],
+  },
+];
+
+function SkillBar({
+  skill,
+  isVisible,
+  index,
+}: {
+  skill: Skill;
+  isVisible: boolean;
+  index: number;
+}) {
+  return (
+    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center">
+            <Image
+              src={skill.iconSrc}
+              alt={`${skill.name} logo`}
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain"
+            />
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold text-black">{skill.name}</h3>
+          </div>
+        </div>
+        <p className="text-sm font-semibold text-gray-500">{skill.level}%</p>
+      </div>
+
+      <div className="mt-4 h-3 overflow-hidden rounded-full bg-gray-100">
+        <div
+          className="h-full rounded-full bg-black transition-[width] duration-1000 ease-out"
+          style={{
+            width: isVisible ? `${skill.level}%` : "0%",
+            transitionDelay: `${index * 120}ms`,
+          }}
+        />
+      </div>
+
+      <p className="mt-4 text-sm leading-6 text-gray-600">{skill.description}</p>
+    </div>
+  );
+}
 
 export function SectionAbout() {
+  const stackRef = useRef<HTMLDivElement | null>(null);
+  const [animateBars, setAnimateBars] = useState(false);
+
+  useEffect(() => {
+    const node = stackRef.current;
+    if (!node || animateBars) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry?.isIntersecting) {
+          return;
+        }
+
+        setAnimateBars(true);
+        observer.disconnect();
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, [animateBars]);
+
+  let skillIndex = 0;
+
   return (
-    <section
-      id="about"
-      className="min-h-screen bg-white flex items-center"
-    >
-      <div className="max-w-5xl mx-auto px-6 w-full space-y-10">
+    <section id="about" className="min-h-screen bg-white py-24">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="space-y-3">
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gray-400">
+            About
+          </p>
+          <h1 className="text-4xl font-bold text-black md:text-5xl">About Me</h1>
+        </div>
 
-        <h1 className="text-4xl font-bold">About Me!</h1>
+        <div ref={stackRef} className="mt-12">
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold text-black">Tech Stack</h2>
+          </div>
 
-        <h2 className="text-2xl font-semibold mb-4">Tech Stack</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-1">
+          <div className="space-y-10">
+            {skillGroups.map((group) => (
+              <div key={group.title} className="space-y-4">
+                <h3 className="text-xl font-semibold text-black">{group.title}</h3>
 
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                  {group.skills.map((skill) => {
+                    const currentIndex = skillIndex;
+                    skillIndex += 1;
+
+                    return (
+                      <SkillBar
+                        key={skill.name}
+                        skill={skill}
+                        isVisible={animateBars}
+                        index={currentIndex}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-16 grid gap-10 md:grid-cols-3">
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-black">
-              Languages
-            </h3>
-            <div className="flex flex-wrap gap-6">
-              {[
-                { src: "/techstack/JavaScript.svg", name: "JavaScript" },
-                { src: "/techstack/TypeScript.svg", name: "TypeScript" },
-                { src: "/techstack/Python.svg", name: "Python" },
-              ].map((tech) => (
-                <TechItem key={tech.name} {...tech} />
-              ))}
-            </div>
+            <h2 className="mb-4 text-2xl font-semibold">Awards</h2>
+            <ul className="list-disc list-inside space-y-2 text-gray-600">
+              <li>SSAFY 14기 특화 프로젝트 서울 7반 1위</li>
+              <li>2017 전국 기능경기대회 1위</li>
+            </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-black">
-              Frameworks
-            </h3>
-            <div className="flex flex-wrap gap-6">
-              {[
-                { src: "/techstack/NextJS.svg", name: "Next.js" },
-                { src: "/techstack/Vue.svg", name: "Vue" },
-                { src: "/techstack/Django.svg", name: "Django" },
-                { src: "/techstack/TailwindCSS.svg", name: "Tailwind CSS" },
-              ].map((tech) => (
-                <TechItem key={tech.name} {...tech} />
-              ))}
-            </div>
+            <h2 className="mb-4 text-2xl font-semibold">Licence</h2>
+            <ul className="list-disc list-inside space-y-2 text-gray-600">
+              <li>OPIC (IL)</li>
+              <li>컴퓨터활용능력 1급</li>
+              <li>전자기기 기능사</li>
+            </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-black">
-              Libraries
-            </h3>
-            <div className="flex flex-wrap gap-6">
-              {[
-                { src: "/techstack/React.svg", name: "React" },
-                { src: "/techstack/ThreeJS.svg", name: "Three.js" },
-              ].map((tech) => (
-                <TechItem key={tech.name} {...tech} />
-              ))}
-            </div>
+            <h2 className="mb-4 text-2xl font-semibold">Education</h2>
+            <ul className="list-disc list-inside space-y-2 text-gray-600">
+              <li>Samsung Software AI Academy For Youth (SSAFY)</li>
+              <li>충북반도체고등학교 반도체 전공</li>
+            </ul>
           </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-black">
-              Infra & ETC
-            </h3>
-            <div className="flex flex-wrap gap-6">
-              {[
-                { src: "/techstack/Docker.svg", name: "Docker" },
-                { src: "/techstack/AWS-Dark.svg", name: "AWS" },
-                { src: "/techstack/Figma.svg", name: "Figma" },
-              ].map((tech) => (
-                <TechItem key={tech.name} {...tech} />
-              ))}
-            </div>
-          </div>
-
         </div>
-
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Awards</h2>
-          <ul className="list-disc list-inside text-gray-600">
-            <li>SSAFY 14기 특화 프로젝트 서울 7반 1위</li>
-            <li>2017 전국 기능경기대회 1위</li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Licence</h2>
-          <ul className="list-disc list-inside text-gray-600">
-            <li>OPIC (IL)</li>
-            <li>컴퓨터활용능력 1급</li>
-            <li>전자기기 기능사</li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Education</h2>
-          <ul className="list-disc list-inside text-gray-600">
-            <li className="text-gray-600">
-              Samsung Software AI Academy For Youth (SSAFY)
-            </li>
-            <li className="text-gray-600">
-              충북반도체고등학교 반도체 전공
-            </li>
-          </ul>
-        </div>
-
       </div>
     </section>
   );
