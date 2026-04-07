@@ -79,15 +79,7 @@ const contributionRolesByProjectId: Record<
 > = {
   hairddae: [
     {
-      title: "1. 인증 및 사용자 진입 흐름 구현",
-      details: [
-        "TanStack Router 기반으로 인증/비인증 라우트를 분리하고 보호 라우트를 구성했습니다.",
-        "로그인 후 메인 페이지로 자연스럽게 연결되도록 사용자 진입 흐름을 설계했습니다.",
-        "API 401 응답 발생 시 refresh token 재발급을 시도하는 세션 유지 로직을 구현했습니다.",
-      ],
-    },
-    {
-      title: "2. 실시간 헤어 피팅 카메라 기능 구현",
+      title: "1. 실시간 헤어 피팅 카메라 기능 구현",
       details: [
         "카메라 입력과 헤어 선택 상태를 연동하여 실시간 가상 피팅 화면을 구현했습니다.",
         "헤어 적용 중 상태 변화가 명확히 보이도록 모달과 UI 피드백을 구성했습니다.",
@@ -95,7 +87,7 @@ const contributionRolesByProjectId: Record<
       ],
     },
     {
-      title: "3. AI 보정 및 디자이너 연결 구현",
+      title: "2. AI 보정 및 디자이너 연결 구현",
       details: [
         "캡처 결과물을 AI 보정 기능과 연결해 체험 결과의 완성도를 높였습니다.",
         "현재 위치 기반 디자이너 탐색 기능을 구현하여 상담으로 이어지는 흐름을 구성했습니다.",
@@ -228,7 +220,7 @@ export function ProjectShowcase({ project }: { project: Project }) {
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-6xl">
               {project.name}
             </h1>
-            <p className="mt-4 max-w-4xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
+            <p className="mt-4 max-w-4xl whitespace-pre-line text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
               {project.summary}
             </p>
           </div>
@@ -304,9 +296,6 @@ export function ProjectShowcase({ project }: { project: Project }) {
           >
             <div className="flex items-center justify-between gap-4">
               <p className="text-lg font-bold text-white md:text-xl">기술 스택</p>
-              <div className="rounded-full border border-white/10 bg-slate-950 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-slate-300">
-                {visibleStackItems.length} Items
-              </div>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2.5 sm:gap-3">

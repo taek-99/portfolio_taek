@@ -41,10 +41,10 @@ export const projects: Project[] = [
     team: "5인 프로젝트\nFE 2 / BE 1 / AI 2",
     category: "AI Hair Styling Web App",
     summary:
-      "헤어 스타일 탐색부터 실시간 가상 피팅, 결과 저장, 디자이너 상담 연결까지 이어지는 흐름을 설계한 프로젝트입니다. 프론트엔드에서는 인증 진입 구조, 세션 유지, WebRTC 기반 카메라 체험 UX를 중심으로 구현했습니다.",
+      "헤어스타일 선택에 대한 불확실성과 실패에 대한 두려움을 해결하기 위해, 실시간 가상 피팅과 AI 보정을 통해 사용자가 직접 스타일을 체험하고 상담까지 이어질 수 있도록 설계한 서비스",
     oneLiner: "AI 기반 실시간 \n헤어 가상 피팅 \n서비스",
     outcome:
-      "인증 진입부터 카메라 체험, 결과 확인, 상담 연결까지 하나의 끊기지 않는 사용자 여정으로 정리했습니다.",
+      "카메라 체험부터 결과 확인, 디자이너 상담 연결까지 하나의 끊기지 않는 사용자 여정으로 정리했습니다.",
     accentClass: "from-rose-100 via-orange-50 to-white",
     panelClass: "bg-[linear-gradient(135deg,#fff7ed_0%,#fffbeb_45%,#ffffff_100%)]",
     features: [
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     team: "4인 프로젝트\nFE 2 / BE 2",
     category: "Accessibility Voice Interface Service",
     summary:
-      "시각 장애인을 위한 음성 중심 헬스 케어 서비스입니다. 화면 요소를 단순화하고 STT, TTS 기반 상호작용이 자연스럽게 이어지도록 FE 구조를 정리했습니다.",
+      "시각장애인 및 저시력자의 정보 접근 한계를 해결하기 위해, STT·TTS 기반 음성 인터페이스를 \n활용한 헬스케어 보조 서비스",
     oneLiner: "시각 장애인을 위한 TTS 헬스 케어 \n서비스",
     outcome:
       "시각 정보 의존도를 낮추고, 명령 처리와 안내 흐름이 직관적으로 이어지도록 인터랙션 구조를 조정했습니다.",
@@ -117,7 +117,7 @@ export const projects: Project[] = [
     team: "2인 프로젝트\nFE 1 / BE 1",
     category: "Emergency Room Recommendation Web App",
     summary:
-      "위치, 증상, 병상 상태를 결합해 빠르게 갈 수 있는 응급실을 탐색하는 서비스입니다. 프론트엔드에서는 3D 신체 선택, 위치 기반 탐색, 추천 결과 전달 경험을 구현했습니다.",
+      "사회적 문제인 응급실 뺑뺑이를 줄이기 위해, 실시간 위치와 병상 상태를 반영해 이동 가능한 \n응급실을 추천하는 서비스",
     oneLiner: "실시간 응급실 추천 서비스",
     outcome:
       "3D 증상 입력부터 결과 비교와 병상 상태 확인까지 판단 시간을 줄이는 화면 흐름을 구성했습니다.",

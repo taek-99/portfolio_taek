@@ -22,6 +22,7 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
   const [scriptsReady, setScriptsReady] = useState(false);
   const [canProceed, setCanProceed] = useState(false);
   const [isLaunching, setIsLaunching] = useState(false);
+  const [countdown, setCountdown] = useState(5);
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const backgroundRef = useRef<HTMLDivElement | null>(null);
@@ -34,6 +35,17 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
   const atmosphereRef = useRef<HTMLDivElement | null>(null);
   const vignetteRef = useRef<HTMLDivElement | null>(null);
   const vantaRef = useRef<{ destroy?: () => void } | null>(null);
+  const hasFinishedRef = useRef(false);
+  const canProceedRef = useRef(false);
+
+  function finishIntro() {
+    if (hasFinishedRef.current) {
+      return;
+    }
+
+    hasFinishedRef.current = true;
+    onDone?.();
+  }
 
   useEffect(() => {
     let i = 0;
@@ -42,12 +54,38 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
       i += 1;
       if (i === TEXT.length) {
         clearInterval(interval);
+        canProceedRef.current = true;
         setCanProceed(true);
       }
     }, 90);
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    rootRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (!canProceed) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setCountdown((current) => (current > 0 ? current - 1 : 0));
+    }, 1000);
+
+    const timeout = setTimeout(() => {
+      if (canProceedRef.current && !isLaunching && !hasFinishedRef.current) {
+        handleProceed();
+      }
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [canProceed, isLaunching]);
 
   useEffect(() => {
     if (!scriptsReady || !backgroundRef.current || !window.VANTA?.CLOUDS2) {
@@ -102,7 +140,7 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
   }, []);
 
   function handleProceed() {
-    if (!canProceed || isLaunching) {
+    if (!canProceedRef.current || isLaunching || hasFinishedRef.current) {
       return;
     }
 
@@ -115,7 +153,7 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
       !atmosphereRef.current ||
       !vignetteRef.current
     ) {
-      onDone?.();
+      finishIntro();
       return;
     }
 
@@ -133,7 +171,7 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
 
     const timeline = gsap.timeline({
       defaults: { ease: "power3.out" },
-      onComplete: () => onDone?.(),
+      onComplete: finishIntro,
     });
 
     timeline
@@ -321,9 +359,15 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
               className={`mt-6 text-sm uppercase tracking-[0.35em] text-white/80 transition-opacity duration-500 ${
                 canProceed ? "opacity-100" : "opacity-0"
               }`}
+              style={{
+                animation: canProceed ? "intro-blink 1.4s ease-in-out infinite" : "none",
+              }}
             >
               Launch To Enter
             </p>
+            {canProceed ? (
+              <p className="mt-4 text-xs uppercase tracking-[0.3em] text-white/60">{countdown}</p>
+            ) : null}
           </div>
 
           <div
@@ -346,6 +390,17 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
           </div>
         </div>
       </div>
+      <style jsx>{`
+        @keyframes intro-blink {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.38;
+          }
+        }
+      `}</style>
     </>
   );
 }

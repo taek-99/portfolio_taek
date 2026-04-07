@@ -7,8 +7,8 @@ const navItems = [
   {
     href: "#Home",
     label: "Home",
-    imageSrc: withBasePath("/planet/saturn_full 1.png"),
-    sizeClassName: "h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24",
+    imageSrc: withBasePath("/planet/planet_0_2_clean.png"),
+    sizeClassName: "h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20",
   },
   {
     href: "#about",
@@ -19,8 +19,8 @@ const navItems = [
   {
     href: "#projects",
     label: "Project",
-    imageSrc: withBasePath("/planet/planet_0_2_clean.png"),
-    sizeClassName: "h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20",
+    imageSrc: withBasePath("/planet/saturn_full 1.png"),
+    sizeClassName: "h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24",
   },
   {
     href: "#contact",
