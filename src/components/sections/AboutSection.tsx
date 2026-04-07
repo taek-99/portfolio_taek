@@ -31,7 +31,7 @@ const skillGroups: SkillGroup[] = [
     skills: [
       {
         name: "JavaScript",
-        level: 68,
+        level: 78,
         iconSrc: withBasePath("/techstack/JavaScript.svg"),
         description: "Vue 기반 프로젝트에서 추천 결과, 페이지 흐름, 사용자 인터랙션을 직접 구현했습니다.",
       },

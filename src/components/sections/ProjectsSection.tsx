@@ -311,7 +311,7 @@ export function SectionProjects() {
             className="pointer-events-none invisible absolute inset-0 flex translate-y-2 flex-col items-center justify-center rounded-[36px] bg-[rgba(255,255,255,0.97)] p-6 text-center opacity-0 md:p-8"
           >
             <div className="flex max-w-[18rem] flex-col items-center gap-5 md:max-w-[20rem]">
-              <p className="text-xl font-bold leading-8 text-black md:text-2xl md:leading-9">
+              <p className="whitespace-pre-line text-xl font-bold leading-8 text-black md:text-2xl md:leading-9">
                 {project.oneLiner}
               </p>
               <div className="flex flex-wrap justify-center gap-3 text-sm font-medium text-black md:text-base">
@@ -347,11 +347,11 @@ export function SectionProjects() {
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUpOrCancel}
           onPointerCancel={handlePointerUpOrCancel}
-          className="scrollbar-none -mx-3 flex cursor-grab gap-6 overflow-x-auto px-3 pb-6 pt-4 active:cursor-grabbing"
+          className="scrollbar-none -mx-2 flex cursor-grab gap-4 overflow-x-auto px-2 pb-6 pt-4 active:cursor-grabbing sm:-mx-3 sm:gap-6 sm:px-3"
         >
           {displayProjects.map((project, index) => {
             const isActive = project.id === activeProject.id;
-            const className = `group relative min-w-[260px] rounded-[36px] border border-white/10 bg-slate-950/70 p-6 shadow-[0_22px_48px_rgba(2,6,23,0.36)] transition md:min-w-[340px] md:p-8 ${
+            const className = `group relative min-w-[78vw] max-w-[82vw] rounded-[30px] border border-white/10 bg-slate-950/70 p-4 shadow-[0_22px_48px_rgba(2,6,23,0.36)] transition sm:min-w-[300px] sm:max-w-none sm:rounded-[36px] sm:p-6 md:min-w-[340px] md:p-8 ${
               isActive ? "ring-1 ring-white/20" : ""
             }`;
 

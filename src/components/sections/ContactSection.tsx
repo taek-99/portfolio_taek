@@ -61,7 +61,7 @@ export function SectionContact() {
           <h1 className="text-4xl font-bold text-white md:text-5xl">Contact</h1>
         </div>
 
-        <div className="mt-12 rounded-[36px] border border-white/10 bg-[linear-gradient(180deg,rgba(148,163,184,0.14),rgba(71,85,105,0.2))] px-8 py-10 shadow-[0_24px_80px_rgba(15,23,42,0.28)] backdrop-blur-sm md:px-12 md:py-12">
+        <div className="mt-12 rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(148,163,184,0.14),rgba(71,85,105,0.2))] px-5 py-8 shadow-[0_24px_80px_rgba(15,23,42,0.28)] backdrop-blur-sm sm:rounded-[36px] sm:px-8 sm:py-10 md:px-12 md:py-12">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
             <form onSubmit={handleSubmit} className="max-w-xl space-y-6">
               <div>
@@ -104,7 +104,7 @@ export function SectionContact() {
               </button>
             </form>
 
-            <div className="space-y-6 rounded-[28px] border border-white/10 bg-slate-900/35 p-6">
+            <div className="space-y-6 rounded-[24px] border border-white/10 bg-slate-900/35 p-5 sm:rounded-[28px] sm:p-6">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">
                   GitHub
@@ -113,7 +113,7 @@ export function SectionContact() {
                   href="https://github.com/taek-99"
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-2 block text-lg font-semibold text-white transition hover:text-sky-300"
+                  className="mt-2 block break-all text-base font-semibold text-white transition hover:text-sky-300 sm:text-lg"
                 >
                   github.com/taek-99
                 </a>
@@ -125,7 +125,7 @@ export function SectionContact() {
                 </p>
                 <a
                   href="mailto:gunha1215@gmail.com"
-                  className="mt-2 block text-lg font-semibold text-white transition hover:text-sky-300"
+                  className="mt-2 block break-all text-base font-semibold text-white transition hover:text-sky-300 sm:text-lg"
                 >
                   gunha1215@gmail.com
                 </a>
@@ -137,7 +137,7 @@ export function SectionContact() {
                 </p>
                 <a
                   href="tel:01083564007"
-                  className="mt-2 block text-lg font-semibold text-white transition hover:text-sky-300"
+                  className="mt-2 block text-base font-semibold text-white transition hover:text-sky-300 sm:text-lg"
                 >
                   010-8356-4007
                 </a>

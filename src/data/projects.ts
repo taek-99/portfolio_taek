@@ -95,7 +95,16 @@ export const projects: Project[] = [
       "오인식과 예외 상황을 고려한 인터랙션 처리",
       "접근성 중심 UI 구조와 흐름 설계",
     ],
-    stack: ["Next.js", "TypeScript", "Zustand", "Tailwind CSS", "STT", "TTS"],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Redux Toolkit",
+      "zotai",
+      "msw",
+      "Tailwind CSS",
+      "STT",
+      "TTS",
+    ],
     note:
       "이 프로젝트는 문서와 회고 기준으로 정리했습니다. 포트폴리오에서는 FE 역할과 접근성 설계 경험 위주로 재구성했습니다.",
   },
