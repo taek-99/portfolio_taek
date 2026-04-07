@@ -7,10 +7,11 @@ import { SectionHome } from "../components/sections/HomeSection";
 import { SectionProjects } from "../components/sections/ProjectsSection";
 import { useEffect, useState } from "react";
 
+let hasShownIntroInSession = false;
 
 export default function Home() {
-    const [showIntro, setShowIntro] = useState(true);
-    const [showMain, setShowMain] = useState(false);
+    const [showIntro, setShowIntro] = useState(() => !hasShownIntroInSession);
+    const [showMain, setShowMain] = useState(() => hasShownIntroInSession);
 
     useEffect(() => {
         if (showIntro) {
@@ -21,9 +22,14 @@ export default function Home() {
         return () => clearTimeout(timeout);
     }, [showIntro]);
 
+    function handleIntroDone() {
+        hasShownIntroInSession = true;
+        setShowIntro(false);
+    }
+
     return (
         <div className="relative">
-        {showIntro && <IntroOverlay onDone={() => setShowIntro(false)} />}
+        {showIntro && <IntroOverlay onDone={handleIntroDone} />}
 
             <main
                 className={`min-h-screen transition-opacity duration-700 ${

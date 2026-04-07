@@ -1,285 +1,286 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { withBasePath } from "../../lib/site";
-
-type ProjectImage = {
-  src: string;
-  alt: string;
-};
-
-type Project = {
-  id: string;
-  name: string;
-  period: string;
-  team: string;
-  category: string;
-  summary: string;
-  features: string[];
-  contributions: string[];
-  stack: string[];
-  images?: ProjectImage[];
-  note?: string;
-};
-
-const projects: Project[] = [
-  {
-    id: "hairddae",
-    name: "헤어때",
-    period: "2026.03.03 - 2026.04.03",
-    team: "5인 팀 프로젝트 · FE 2 / BE 1 / AI 2",
-    category: "AI Hair Styling Web App",
-    summary:
-      "스타일 탐색부터 실시간 가상 피팅, 결과 저장, 디자이너 상담까지 이어지는 흐름을 가진 서비스입니다. 프론트엔드에서는 인증 진입 흐름과 WebRTC 기반 카메라 체험 UX를 중심으로 구현했습니다.",
-    features: [
-      "실시간 가상 헤어 피팅 카메라 화면",
-      "캡처, 다운로드, AI 보정 연결",
-      "디자이너 탐색과 상담 요청 흐름",
-    ],
-    contributions: [
-      "TanStack Router 기반 인증/비인증 라우트 분리와 보호 라우트 구성",
-      "API 401 응답 시 refresh token 재발급을 포함한 세션 유지 로직 구현",
-      "카메라, 캡처, 보정, 상담 연결까지 이어지는 연속 사용자 플로우 설계",
-    ],
-    stack: [
-      "React 19",
-      "TypeScript",
-      "Vite 7",
-      "TanStack Router",
-      "TanStack Query",
-      "Tailwind CSS v4",
-      "Storybook",
-      "Playwright",
-      "WebRTC",
-      "PWA",
-    ],
-    images: [
-      {
-        src: withBasePath("/projects/hairddae-main.png"),
-        alt: "헤어때 메인 화면",
-      },
-      {
-        src: withBasePath("/projects/hairddae-camera.png"),
-        alt: "헤어때 카메라 화면",
-      },
-    ],
-  },
-  {
-    id: "see-sun",
-    name: "See:Sun",
-    period: "2026.01.05 - 2026.01.28",
-    team: "4인 팀 프로젝트 · FE 2 / BE 2",
-    category: "Accessibility Voice Interface Service",
-    summary:
-      "시각장애인과 저시력자를 위한 음성 중심 인터페이스 서비스입니다. 화면 의존도를 낮추고 STT, TTS 기반 상호작용을 강화하는 방향으로 접근성 중심 FE 구조를 설계했습니다.",
-    features: [
-      "음성 입력 기반 사용자 명령 처리",
-      "TTS 중심 안내 흐름과 접근성 강화",
-      "시각 의존도를 낮춘 단순한 인터랙션 구조",
-    ],
-    contributions: [
-      "Web Speech API 기반 STT 입력 기능과 명령 트리거 흐름 구현",
-      "음성 인식 실패와 예외 상황을 고려한 인터랙션 처리",
-      "기획과 협업하며 접근성을 고려한 UI 구조와 UX 단순화 설계",
-    ],
-    stack: ["Next.js", "TypeScript", "Zustand", "Tailwind CSS", "STT", "TTS"],
-    note:
-      "이 프로젝트는 문서와 이력서 기준으로 정리했습니다. 포트폴리오에는 FE 역할과 접근성 설계 관점만 반영했습니다.",
-  },
-  {
-    id: "smart-er",
-    name: "Smart 응급실 추천 서비스",
-    period: "2025.11.17 - 2025.12.26",
-    team: "2인 팀 프로젝트 · FE 1 / BE 1",
-    category: "Emergency Room Recommendation Web App",
-    summary:
-      "위치, 증상, 병상 상태를 결합해 더 빠르게 갈 수 있는 응급실을 탐색하는 서비스입니다. 프론트엔드에서는 3D 증상 선택, 지도 기반 탐색, 추천 결과 전달 경험을 담당했습니다.",
-    features: [
-      "Three.js 기반 3D 신체 부위 선택 UI",
-      "위치 기반 응급실 탐색과 거리 계산",
-      "추천 결과, 병상 상태, 상세 정보 시각화",
-    ],
-    contributions: [
-      "3D 마네킹 렌더링과 Raycasting 기반 신체 부위 선택 인터랙션 구현",
-      "GeoLocation과 거리 계산 로직을 이용한 추천 흐름 구성",
-      "응급실 리스트, 상세 페이지, 병상 상태 시각화 UI 설계",
-    ],
-    stack: [
-      "Vue 3",
-      "JavaScript",
-      "Axios",
-      "Vite",
-      "Tailwind CSS",
-      "Vue Router",
-      "Pinia",
-      "Three.js",
-      "PWA",
-    ],
-    images: [
-      {
-        src: withBasePath("/projects/smart-er-ai.jpg"),
-        alt: "응급실 추천 서비스 AI 소개 화면",
-      },
-      {
-        src: withBasePath("/projects/smart-er-emergency.jpg"),
-        alt: "응급실 추천 서비스 대표 화면",
-      },
-    ],
-  },
-];
+import Link from "next/link";
+import { gsap } from "gsap";
+import { useEffect, useRef, useState } from "react";
+import { projects } from "../../data/projects";
 
 export function SectionProjects() {
-  const [selectedProjectId, setSelectedProjectId] = useState(projects[0]?.id);
-  const selectedProject =
-    projects.find((project) => project.id === selectedProjectId) ?? projects[0];
+  const [activeProjectId, setActiveProjectId] = useState(projects[0]?.id);
+  const activeProject =
+    projects.find((project) => project.id === activeProjectId) ?? projects[0];
+
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const overlayRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const logoRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const titleRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    if (!sectionRef.current || !trackRef.current) {
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      gsap.from(trackRef.current?.children ?? [], {
+        y: 24,
+        opacity: 0,
+        duration: 0.75,
+        stagger: 0.08,
+        ease: "power3.out",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const cards = cardRefs.current.filter(Boolean);
+    cards.forEach((card) => {
+      const isActive = card?.dataset.projectId === activeProjectId;
+      gsap.to(card, {
+        y: isActive ? -8 : 0,
+        scale: isActive ? 1 : 0.96,
+        opacity: isActive ? 1 : 0.62,
+        duration: 0.45,
+        ease: "power3.out",
+      });
+    });
+  }, [activeProjectId]);
+
+  function animateCardHover(index: number, isEntering: boolean) {
+    const card = cardRefs.current[index];
+    const overlay = overlayRefs.current[index];
+    const logo = logoRefs.current[index];
+    const title = titleRefs.current[index];
+
+    if (!card || !overlay || !logo || !title) {
+      return;
+    }
+
+    if (isEntering) {
+      gsap.to(card, {
+        y: -12,
+        scale: 1.02,
+        duration: 0.45,
+        ease: "power3.out",
+      });
+
+      gsap.to(overlay, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.35,
+        ease: "power3.out",
+      });
+
+      gsap.to(logo, {
+        scale: 0.82,
+        y: -18,
+        autoAlpha: 0,
+        duration: 0.32,
+        ease: "power3.out",
+      });
+
+      gsap.to(title, {
+        y: -14,
+        autoAlpha: 0,
+        duration: 0.32,
+        ease: "power3.out",
+      });
+      return;
+    }
+
+    const isActive = card.dataset.projectId === activeProjectId;
+
+    gsap.to(card, {
+      y: isActive ? -8 : 0,
+      scale: isActive ? 1 : 0.96,
+      duration: 0.45,
+      ease: "power3.out",
+    });
+
+    gsap.to(overlay, {
+      autoAlpha: 0,
+      y: 8,
+      duration: 0.28,
+      ease: "power2.out",
+    });
+
+    gsap.to(logo, {
+      scale: 1,
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.35,
+      ease: "power3.out",
+    });
+
+    gsap.to(title, {
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.35,
+      ease: "power3.out",
+    });
+  }
+
+  function syncProjectFromScroll() {
+    if (!trackRef.current) {
+      return;
+    }
+
+    const track = trackRef.current;
+    const center = track.scrollLeft + track.clientWidth / 2;
+
+    let closestId = activeProjectId;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    cardRefs.current.forEach((card) => {
+      if (!card?.dataset.projectId) {
+        return;
+      }
+
+      const cardCenter = card.offsetLeft + card.clientWidth / 2;
+      const distance = Math.abs(center - cardCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestId = card.dataset.projectId;
+      }
+    });
+
+    if (closestId && closestId !== activeProjectId) {
+      setActiveProjectId(closestId);
+    }
+  }
+
+  function handleTrackWheel(event: React.WheelEvent<HTMLDivElement>) {
+    if (!trackRef.current) {
+      return;
+    }
+
+    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+      return;
+    }
+
+    event.preventDefault();
+    trackRef.current.scrollLeft += event.deltaY;
+    syncProjectFromScroll();
+  }
 
   return (
-    <section id="projects" className="min-h-screen bg-white px-6 py-24">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-10 space-y-3">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gray-400">
-            Projects
-          </p>
-          <h1 className="text-4xl font-bold text-black md:text-5xl">
-            Frontend Project
-          </h1>
-          <p className="max-w-2xl text-base leading-7 text-gray-600">
-            프로젝트 목록에서 선택하면 FE 중심의 역할과 구현 포인트를 확인할 수
-            있습니다.
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#f3efe7_46%,#ffffff_100%)] px-6 py-24"
+    >
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-3">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gray-400">
+              Projects
+            </p>
+            <h1 className="text-4xl font-bold text-black md:text-5xl">
+              Select A Project
+            </h1>
+          </div>
+
+          <p className="text-xs uppercase tracking-[0.28em] text-gray-400">
+            Swipe Horizontally
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-          <aside className="rounded-[28px] border border-gray-200 bg-[#faf8f4] p-3">
-            <div className="space-y-2">
-              {projects.map((project) => {
-                const isSelected = project.id === selectedProject.id;
+        <div
+          ref={trackRef}
+          onWheel={handleTrackWheel}
+          onScroll={syncProjectFromScroll}
+          className="scrollbar-none -mx-3 flex gap-6 overflow-x-auto px-3 pb-6 pt-4"
+        >
+          {projects.map((project, index) => {
+            const isActive = project.id === activeProject.id;
 
-                return (
-                  <button
-                    key={project.id}
-                    type="button"
-                    onClick={() => setSelectedProjectId(project.id)}
-                    className={`w-full rounded-2xl border px-4 py-4 text-left transition ${
-                      isSelected
-                        ? "border-black bg-white shadow-sm"
-                        : "border-transparent bg-transparent hover:border-gray-200 hover:bg-white/70"
-                    }`}
+            return (
+              <Link
+                key={project.id}
+                href={`/projects/${project.id}`}
+                ref={(node) => {
+                  cardRefs.current[index] = node;
+                }}
+                data-project-id={project.id}
+                onMouseEnter={() => {
+                  setActiveProjectId(project.id);
+                  animateCardHover(index, true);
+                }}
+                onMouseLeave={() => animateCardHover(index, false)}
+                onFocus={() => {
+                  setActiveProjectId(project.id);
+                  animateCardHover(index, true);
+                }}
+                onBlur={() => animateCardHover(index, false)}
+                className={`group relative min-w-[260px] rounded-[36px] border border-black/10 bg-white/90 p-6 shadow-[0_22px_48px_rgba(15,23,42,0.08)] transition md:min-w-[340px] md:p-8 ${
+                  isActive ? "ring-1 ring-black/15" : ""
+                }`}
+              >
+                <div
+                  className={`absolute inset-0 rounded-[36px] bg-gradient-to-br ${project.accentClass} opacity-85`}
+                />
+                <div className="relative flex min-h-[320px] flex-col items-center justify-center gap-8 text-center md:min-h-[420px]">
+                  <div
+                    ref={(node) => {
+                      logoRefs.current[index] = node;
+                    }}
+                    className="flex items-center justify-center py-2"
                   >
-                    <p className="text-xs uppercase tracking-[0.18em] text-gray-400">
-                      {project.period}
-                    </p>
-                    <p className="mt-2 text-lg font-semibold text-black">
-                      {project.name}
-                    </p>
-                    <p className="mt-1 text-sm text-gray-500">
-                      {project.category}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-          </aside>
-
-          <article className="rounded-[28px] border border-gray-200 bg-[#faf8f4] p-6 md:p-8">
-            <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <p className="text-sm font-medium tracking-wide text-gray-500">
-                    {selectedProject.period}
-                  </p>
-                  <div>
-                    <h2 className="text-3xl font-bold text-black md:text-4xl">
-                      {selectedProject.name}
-                    </h2>
-                    <p className="mt-2 text-sm text-gray-500">
-                      {selectedProject.team}
-                    </p>
-                    <p className="mt-1 text-sm uppercase tracking-[0.18em] text-gray-400">
-                      {selectedProject.category}
-                    </p>
-                  </div>
-                  <p className="max-w-2xl text-sm leading-7 text-gray-600 md:text-base">
-                    {selectedProject.summary}
-                  </p>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-gray-200 bg-white p-4">
-                    <h3 className="text-sm font-semibold text-black">
-                      핵심 기능
-                    </h3>
-                    <ul className="mt-3 space-y-2 text-sm leading-6 text-gray-600">
-                      {selectedProject.features.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="rounded-2xl border border-gray-200 bg-white p-4">
-                    <h3 className="text-sm font-semibold text-black">
-                      FE 기여
-                    </h3>
-                    <ul className="mt-3 space-y-2 text-sm leading-6 text-gray-600">
-                      {selectedProject.contributions.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {selectedProject.note ? (
-                  <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-4 py-3 text-sm leading-6 text-gray-500">
-                    {selectedProject.note}
-                  </div>
-                ) : null}
-
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.stack.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-gray-300 bg-white px-3 py-1 text-xs text-gray-600"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-                {selectedProject.images?.length ? (
-                  selectedProject.images.map((image) => (
-                    <div
-                      key={image.src}
-                      className="overflow-hidden rounded-2xl border border-gray-200 bg-white p-3"
-                    >
+                    <div className="flex h-36 w-36 items-center justify-center rounded-[32px] border border-white/70 bg-white/90 shadow-[0_20px_40px_rgba(255,255,255,0.45)] md:h-52 md:w-52">
                       <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={960}
-                        height={720}
-                        className="h-auto w-full rounded-xl object-cover"
+                        src={project.iconSrc}
+                        alt={project.iconAlt}
+                        width={136}
+                        height={136}
+                        className="h-24 w-24 object-contain md:h-36 md:w-36"
                       />
                     </div>
-                  ))
-                ) : (
-                  <div className="rounded-2xl border border-gray-200 bg-white p-6">
-                    <p className="text-xs uppercase tracking-[0.18em] text-gray-400">
-                      FE Focus
-                    </p>
-                    <h3 className="mt-3 text-xl font-semibold text-black">
-                      접근성 중심 인터페이스 설계
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-gray-600">
-                      이력서와 프로젝트 문서 기준으로, 음성 중심 인터페이스와
-                      접근성 설계 경험을 포트폴리오에 반영했습니다.
-                    </p>
                   </div>
-                )}
-              </div>
-            </div>
-          </article>
+
+                  <div
+                    ref={(node) => {
+                      titleRefs.current[index] = node;
+                    }}
+                    className="space-y-3"
+                  >
+                    <h3 className="text-3xl font-semibold tracking-tight text-black md:text-4xl">
+                      {project.name}
+                    </h3>
+                  </div>
+
+                  <div
+                    ref={(node) => {
+                      overlayRefs.current[index] = node;
+                    }}
+                    className="pointer-events-none invisible absolute inset-0 flex translate-y-2 flex-col items-center justify-center rounded-[36px] bg-[rgba(8,8,8,0.94)] p-6 text-center opacity-0 md:p-8"
+                  >
+                    <div className="flex max-w-[18rem] flex-col items-center gap-5 md:max-w-[20rem]">
+                    <p className="text-xl font-bold leading-8 text-white md:text-2xl md:leading-9">
+                      {project.oneLiner}
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-3 text-sm font-medium text-white md:text-base">
+                      <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">
+                        {project.team}
+                      </span>
+                      <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">
+                        {project.period}
+                      </span>
+                    </div>
+                    <div className="inline-flex items-center gap-2 text-base font-bold text-white md:text-lg">
+                      <span>더보기</span>
+                      <span>→</span>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
