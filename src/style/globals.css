@@ -9,6 +9,36 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
+
+  .float-satellite {
+    animation: float-satellite 5.5s ease-in-out infinite;
+  }
+
+  .float-satellite-reverse {
+    animation: float-satellite-reverse 6.2s ease-in-out infinite;
+  }
+}
+
+@keyframes float-satellite {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-10deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(-7deg);
+  }
+}
+
+@keyframes float-satellite-reverse {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(170deg);
+  }
+
+  50% {
+    transform: translateY(12px) rotate(173deg);
+  }
 }
 
 

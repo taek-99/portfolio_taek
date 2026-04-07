@@ -38,47 +38,47 @@ export function ProjectShowcase({ project }: { project: Project }) {
   return (
     <div
       ref={rootRef}
-      className={`min-h-screen ${project.panelClass} px-6 py-10 text-black md:px-8 lg:px-10`}
+      className="min-h-screen px-6 py-10 text-white md:px-8 lg:px-10"
     >
-      <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl flex-col rounded-[40px] border border-black/10 bg-white/80 p-6 shadow-[0_30px_100px_rgba(15,23,42,0.14)] backdrop-blur md:p-8 lg:p-10">
+      <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl flex-col rounded-[40px] border border-white/10 bg-slate-950/70 p-6 shadow-[0_30px_100px_rgba(2,6,23,0.4)] backdrop-blur md:p-8 lg:p-10">
         <div
           data-slide-header
-          className="mb-8 flex flex-col gap-6 border-b border-black/10 pb-6 lg:flex-row lg:items-end lg:justify-between"
+          className="mb-8 flex flex-col gap-6 border-b border-white/10 pb-6 lg:flex-row lg:items-end lg:justify-between"
         >
           <div className="space-y-4">
             <Link
               href="/#projects"
-              className="inline-flex items-center gap-2 text-sm text-gray-500 transition hover:text-black"
+              className="inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-white"
             >
               <span>&larr;</span>
               <span>Back To Projects</span>
             </Link>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-full border border-black/10 bg-white px-4 py-1 text-xs uppercase tracking-[0.22em] text-gray-500">
+              <span className="rounded-full border border-white/10 bg-slate-900 px-4 py-1 text-xs uppercase tracking-[0.22em] text-slate-300">
                 {project.period}
               </span>
-              <span className="rounded-full border border-black/10 bg-white px-4 py-1 text-xs uppercase tracking-[0.22em] text-gray-500">
+              <span className="whitespace-pre-line rounded-[20px] border border-white/10 bg-slate-900 px-4 py-1 text-center text-xs uppercase tracking-[0.22em] text-slate-300">
                 {project.team}
               </span>
             </div>
             <div>
-              <p className="text-sm uppercase tracking-[0.24em] text-gray-400">
+              <p className="text-sm uppercase tracking-[0.24em] text-slate-400">
                 {project.category}
               </p>
-              <h1 className="mt-3 text-4xl font-bold tracking-tight text-black md:text-6xl">
+              <h1 className="mt-3 text-4xl font-bold tracking-tight text-white md:text-6xl">
                 {project.name}
               </h1>
-              <p className="mt-4 max-w-3xl text-lg leading-8 text-gray-600">
+              <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">
                 {project.summary}
               </p>
             </div>
           </div>
 
-          <div className="max-w-sm rounded-[28px] border border-black/10 bg-white/90 p-5">
-            <p className="text-xs uppercase tracking-[0.24em] text-gray-400">
+          <div className="max-w-sm rounded-[28px] border border-white/10 bg-slate-900/80 p-5">
+            <p className="text-xs uppercase tracking-[0.24em] text-slate-400">
               Outcome
             </p>
-            <p className="mt-3 text-sm leading-7 text-gray-600">
+            <p className="mt-3 text-sm leading-7 text-slate-300">
               {project.outcome}
             </p>
           </div>
@@ -88,12 +88,12 @@ export function ProjectShowcase({ project }: { project: Project }) {
           <div className="grid gap-6">
             <div
               data-slide-panel
-              className="rounded-[32px] border border-black/10 bg-white p-6"
+              className="rounded-[32px] border border-white/10 bg-slate-900/80 p-6"
             >
-              <p className="text-xs uppercase tracking-[0.24em] text-gray-400">
+              <p className="text-xs uppercase tracking-[0.24em] text-slate-400">
                 Slide Summary
               </p>
-              <p className="mt-4 text-2xl font-semibold leading-tight text-black md:text-3xl">
+              <p className="mt-4 text-2xl font-semibold leading-tight text-white md:text-3xl">
                 {project.oneLiner}
               </p>
             </div>
@@ -101,15 +101,15 @@ export function ProjectShowcase({ project }: { project: Project }) {
             <div className="grid gap-6 md:grid-cols-2">
               <div
                 data-slide-panel
-                className="rounded-[32px] border border-black/10 bg-white p-6"
+                className="rounded-[32px] border border-white/10 bg-slate-900/80 p-6"
               >
-                <p className="text-xs uppercase tracking-[0.24em] text-gray-400">
+                  <p className="text-xs uppercase tracking-[0.24em] text-slate-400">
                   Core Features
                 </p>
-                <ul className="mt-5 space-y-4 text-sm leading-7 text-gray-700">
+                <ul className="mt-5 space-y-4 text-sm leading-7 text-slate-200">
                   {project.features.map((item) => (
                     <li key={item} className="flex gap-3">
-                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-black" />
+                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-sky-300" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -118,15 +118,15 @@ export function ProjectShowcase({ project }: { project: Project }) {
 
               <div
                 data-slide-panel
-                className="rounded-[32px] border border-black/10 bg-white p-6"
+                className="rounded-[32px] border border-white/10 bg-slate-900/80 p-6"
               >
-                <p className="text-xs uppercase tracking-[0.24em] text-gray-400">
+                  <p className="text-xs uppercase tracking-[0.24em] text-slate-400">
                   FE Contribution
                 </p>
-                <ul className="mt-5 space-y-4 text-sm leading-7 text-gray-700">
+                <ul className="mt-5 space-y-4 text-sm leading-7 text-slate-200">
                   {project.contributions.map((item) => (
                     <li key={item} className="flex gap-3">
-                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-black" />
+                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-sky-300" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -136,34 +136,34 @@ export function ProjectShowcase({ project }: { project: Project }) {
 
             <div
               data-slide-panel
-              className="rounded-[32px] border border-black/10 bg-white p-6"
+              className="rounded-[32px] border border-white/10 bg-slate-900/80 p-6"
             >
-              <p className="text-xs uppercase tracking-[0.24em] text-gray-400">
+              <p className="text-xs uppercase tracking-[0.24em] text-slate-400">
                 Stack Note
               </p>
-              <p className="mt-4 text-sm leading-7 text-gray-600">
+              <p className="mt-4 text-sm leading-7 text-slate-300">
                 보유 중인 기술 로고는 실제 아이콘으로 표시했고, 없는 항목은 프로젝트용 배지 형태로 생성해 정리했습니다.
               </p>
               {project.note ? (
-                <p className="mt-5 text-sm leading-7 text-gray-500">{project.note}</p>
+                <p className="mt-5 text-sm leading-7 text-slate-400">{project.note}</p>
               ) : null}
             </div>
           </div>
 
           <div
             data-slide-panel
-            className="rounded-[32px] border border-black/10 bg-white p-6 md:p-7"
+            className="rounded-[32px] border border-white/10 bg-slate-900/80 p-6 md:p-7"
           >
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.24em] text-gray-400">
+                <p className="text-xs uppercase tracking-[0.24em] text-slate-400">
                   Tech Stack Logos
                 </p>
-                <h2 className="mt-3 text-2xl font-semibold text-black md:text-3xl">
+                <h2 className="mt-3 text-2xl font-semibold text-white md:text-3xl">
                   Stack Board
                 </h2>
               </div>
-              <div className="rounded-full border border-black/10 bg-[#f7f7f5] px-4 py-1 text-xs uppercase tracking-[0.2em] text-gray-500">
+              <div className="rounded-full border border-white/10 bg-slate-950 px-4 py-1 text-xs uppercase tracking-[0.2em] text-slate-300">
                 {project.stack.length} Items
               </div>
             </div>
@@ -175,9 +175,9 @@ export function ProjectShowcase({ project }: { project: Project }) {
                 return (
                   <div
                     key={item}
-                    className="rounded-[28px] border border-black/10 bg-[linear-gradient(180deg,#ffffff_0%,#f7f7f5_100%)] p-5"
+                    className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.88)_0%,rgba(15,23,42,0.72)_100%)] p-5"
                   >
-                    <div className="flex h-20 w-20 items-center justify-center rounded-[24px] border border-black/10 bg-white shadow-sm">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-[24px] border border-white/10 bg-slate-950 shadow-sm">
                       {logoSrc ? (
                         <img
                           src={logoSrc}
@@ -185,13 +185,13 @@ export function ProjectShowcase({ project }: { project: Project }) {
                           className="h-11 w-11 object-contain"
                         />
                       ) : (
-                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-sm font-semibold tracking-[0.14em] text-white">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-300 text-sm font-semibold tracking-[0.14em] text-slate-950">
                           {getStackBadgeLabel(item)}
                         </div>
                       )}
                     </div>
-                    <p className="mt-5 text-base font-medium text-black">{item}</p>
-                    <p className="mt-2 text-xs uppercase tracking-[0.18em] text-gray-400">
+                    <p className="mt-5 text-base font-medium text-white">{item}</p>
+                    <p className="mt-2 text-xs uppercase tracking-[0.18em] text-slate-400">
                       {logoSrc ? "Logo Asset" : "Generated Badge"}
                     </p>
                   </div>

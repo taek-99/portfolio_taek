@@ -1,0 +1,35 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="body" x1="160" y1="40" x2="160" y2="230" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="70" y1="130" x2="250" y2="210" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FB7185"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+    <linearGradient id="window" x1="160" y1="88" x2="160" y2="138" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67E8F9"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="160" y1="216" x2="160" y2="292" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDE68A"/>
+      <stop offset="0.6" stop-color="#FB923C"/>
+      <stop offset="1" stop-color="#DC2626"/>
+    </linearGradient>
+    <filter id="glow" x="62" y="210" width="196" height="104" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+  <ellipse cx="160" cy="286" rx="72" ry="18" fill="#FB923C" fill-opacity="0.35" filter="url(#glow)"/>
+  <path d="M160 34C193 58 208 102 208 154V192H112V154C112 102 127 58 160 34Z" fill="url(#body)"/>
+  <path d="M131 192H189V226C189 241 176 254 160 254C144 254 131 241 131 226V192Z" fill="#94A3B8"/>
+  <path d="M112 154L70 208H112V154Z" fill="url(#wing)"/>
+  <path d="M208 154L250 208H208V154Z" fill="url(#wing)"/>
+  <path d="M132 208L108 244L132 236V208Z" fill="#E11D48"/>
+  <path d="M188 208L212 244L188 236V208Z" fill="#E11D48"/>
+  <circle cx="160" cy="114" r="26" fill="url(#window)"/>
+  <circle cx="160" cy="114" r="18" fill="#E0F2FE" fill-opacity="0.85"/>
+  <path d="M146 226L132 286H188L174 226H146Z" fill="url(#flame)"/>
+  <path d="M154 226L146 280H174L166 226H154Z" fill="#FFF7ED"/>
+</svg>

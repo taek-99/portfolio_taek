@@ -60,12 +60,15 @@ export function SectionProjects() {
       return;
     }
 
+    gsap.killTweensOf([card, overlay, logo, title]);
+
     if (isEntering) {
       gsap.to(card, {
         y: -12,
         scale: 1.02,
         duration: 0.45,
         ease: "power3.out",
+        overwrite: true,
       });
 
       gsap.to(overlay, {
@@ -73,6 +76,7 @@ export function SectionProjects() {
         y: 0,
         duration: 0.35,
         ease: "power3.out",
+        overwrite: true,
       });
 
       gsap.to(logo, {
@@ -81,6 +85,7 @@ export function SectionProjects() {
         autoAlpha: 0,
         duration: 0.32,
         ease: "power3.out",
+        overwrite: true,
       });
 
       gsap.to(title, {
@@ -88,6 +93,7 @@ export function SectionProjects() {
         autoAlpha: 0,
         duration: 0.32,
         ease: "power3.out",
+        overwrite: true,
       });
       return;
     }
@@ -99,6 +105,7 @@ export function SectionProjects() {
       scale: isActive ? 1 : 0.96,
       duration: 0.45,
       ease: "power3.out",
+      overwrite: true,
     });
 
     gsap.to(overlay, {
@@ -106,6 +113,7 @@ export function SectionProjects() {
       y: 8,
       duration: 0.28,
       ease: "power2.out",
+      overwrite: true,
     });
 
     gsap.to(logo, {
@@ -114,6 +122,7 @@ export function SectionProjects() {
       autoAlpha: 1,
       duration: 0.35,
       ease: "power3.out",
+      overwrite: true,
     });
 
     gsap.to(title, {
@@ -121,6 +130,7 @@ export function SectionProjects() {
       autoAlpha: 1,
       duration: 0.35,
       ease: "power3.out",
+      overwrite: true,
     });
   }
 
@@ -169,25 +179,17 @@ export function SectionProjects() {
   }
 
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#f3efe7_46%,#ffffff_100%)] px-6 py-24"
-    >
+    <section id="projects" ref={sectionRef} className="min-h-screen px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gray-400">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-400">
               Projects
             </p>
-            <h1 className="text-4xl font-bold text-black md:text-5xl">
+            <h1 className="text-4xl font-bold text-white md:text-5xl">
               Select A Project
             </h1>
           </div>
-
-          <p className="text-xs uppercase tracking-[0.28em] text-gray-400">
-            Swipe Horizontally
-          </p>
         </div>
 
         <div
@@ -207,23 +209,24 @@ export function SectionProjects() {
                   cardRefs.current[index] = node;
                 }}
                 data-project-id={project.id}
-                onMouseEnter={() => {
+                onPointerEnter={() => {
                   setActiveProjectId(project.id);
                   animateCardHover(index, true);
                 }}
-                onMouseLeave={() => animateCardHover(index, false)}
+                onPointerLeave={() => animateCardHover(index, false)}
                 onFocus={() => {
                   setActiveProjectId(project.id);
                   animateCardHover(index, true);
                 }}
                 onBlur={() => animateCardHover(index, false)}
-                className={`group relative min-w-[260px] rounded-[36px] border border-black/10 bg-white/90 p-6 shadow-[0_22px_48px_rgba(15,23,42,0.08)] transition md:min-w-[340px] md:p-8 ${
-                  isActive ? "ring-1 ring-black/15" : ""
+                className={`group relative min-w-[260px] rounded-[36px] border border-white/10 bg-slate-950/70 p-6 shadow-[0_22px_48px_rgba(2,6,23,0.36)] transition md:min-w-[340px] md:p-8 ${
+                  isActive ? "ring-1 ring-white/20" : ""
                 }`}
               >
                 <div
                   className={`absolute inset-0 rounded-[36px] bg-gradient-to-br ${project.accentClass} opacity-85`}
                 />
+
                 <div className="relative flex min-h-[320px] flex-col items-center justify-center gap-8 text-center md:min-h-[420px]">
                   <div
                     ref={(node) => {
@@ -231,7 +234,7 @@ export function SectionProjects() {
                     }}
                     className="flex items-center justify-center py-2"
                   >
-                    <div className="flex h-36 w-36 items-center justify-center rounded-[32px] border border-white/70 bg-white/90 shadow-[0_20px_40px_rgba(255,255,255,0.45)] md:h-52 md:w-52">
+                    <div className="flex h-36 w-36 items-center justify-center rounded-[32px] border border-white/10 bg-slate-900/90 shadow-[0_20px_40px_rgba(2,6,23,0.4)] md:h-52 md:w-52">
                       <Image
                         src={project.iconSrc}
                         alt={project.iconAlt}
@@ -248,7 +251,7 @@ export function SectionProjects() {
                     }}
                     className="space-y-3"
                   >
-                    <h3 className="text-3xl font-semibold tracking-tight text-black md:text-4xl">
+                    <h3 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
                       {project.name}
                     </h3>
                   </div>
@@ -257,24 +260,24 @@ export function SectionProjects() {
                     ref={(node) => {
                       overlayRefs.current[index] = node;
                     }}
-                    className="pointer-events-none invisible absolute inset-0 flex translate-y-2 flex-col items-center justify-center rounded-[36px] bg-[rgba(8,8,8,0.94)] p-6 text-center opacity-0 md:p-8"
+                    className="pointer-events-none invisible absolute inset-0 flex translate-y-2 flex-col items-center justify-center rounded-[36px] bg-[rgba(255,255,255,0.97)] p-6 text-center opacity-0 md:p-8"
                   >
                     <div className="flex max-w-[18rem] flex-col items-center gap-5 md:max-w-[20rem]">
-                    <p className="text-xl font-bold leading-8 text-white md:text-2xl md:leading-9">
-                      {project.oneLiner}
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-3 text-sm font-medium text-white md:text-base">
-                      <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">
-                        {project.team}
-                      </span>
-                      <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">
-                        {project.period}
-                      </span>
-                    </div>
-                    <div className="inline-flex items-center gap-2 text-base font-bold text-white md:text-lg">
-                      <span>더보기</span>
-                      <span>→</span>
-                    </div>
+                      <p className="text-xl font-bold leading-8 text-black md:text-2xl md:leading-9">
+                        {project.oneLiner}
+                      </p>
+                      <div className="flex flex-wrap justify-center gap-3 text-sm font-medium text-black md:text-base">
+                        <span className="whitespace-pre-line rounded-[20px] border border-black/10 bg-black/5 px-4 py-2 text-center">
+                          {project.team}
+                        </span>
+                        <span className="rounded-full border border-black/10 bg-black/5 px-4 py-2">
+                          {project.period}
+                        </span>
+                      </div>
+                      <div className="inline-flex items-center gap-2 text-base font-bold text-black md:text-lg">
+                        <span>더보기</span>
+                        <span>→</span>
+                      </div>
                     </div>
                   </div>
                 </div>
