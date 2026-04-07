@@ -146,7 +146,7 @@ const awards: Award[] = [
   {
     title: "SSAFY 14기 배틀싸피 전국 대항전 1위",
     date: "2025.10.02",
-    description: "전국 대항전 최우수 탱커, 서울 1반 1위",
+    description: "전국 대항전 최우수 1위",
     imageSrcs: [withBasePath("/awards/image (41).png")],
   },
   {
