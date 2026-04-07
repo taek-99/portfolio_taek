@@ -23,6 +23,26 @@ export default function Home() {
     setIsReady(true);
   }, [router]);
 
+  useEffect(() => {
+    if (!isReady) {
+      return;
+    }
+
+    const hash = window.location.hash;
+    if (!hash) {
+      return;
+    }
+
+    const target = document.querySelector(hash);
+    if (!target) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "auto", block: "start" });
+    });
+  }, [isReady]);
+
   if (!isReady) {
     return null;
   }

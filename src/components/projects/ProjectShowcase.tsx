@@ -213,7 +213,7 @@ export function ProjectShowcase({ project }: { project: Project }) {
             className="inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-white"
           >
             <span>&larr;</span>
-            <span>Back To Projects</span>
+            <span>뒤로가기</span>
           </Link>
 
           <div className="mt-5">
@@ -242,31 +242,15 @@ export function ProjectShowcase({ project }: { project: Project }) {
               <p className="text-lg font-bold text-white md:text-xl">프로젝트 정보</p>
               <div className="mt-5 space-y-4">
                 <div className="rounded-[22px] border border-white/10 bg-slate-950/70 px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-slate-500">기간</p>
+                  <p className="text-base font-bold uppercase tracking-[0.18em] text-white">기간</p>
                   <p className="mt-2 text-sm font-medium text-white">{project.period}</p>
                 </div>
                 <div className="rounded-[22px] border border-white/10 bg-slate-950/70 px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-slate-500">인원</p>
+                  <p className="text-base font-bold uppercase tracking-[0.18em] text-white">인원</p>
                   <p className="mt-2 whitespace-pre-line text-sm font-medium text-white">
                     {project.team}
                   </p>
                 </div>
-                {media?.repository ? (
-                  <div className="rounded-[22px] border border-white/10 bg-slate-950/70 px-4 py-3">
-                    <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                      SSAFY LAB Repository
-                    </p>
-                    <a
-                      href={media.repository}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-white transition hover:text-sky-300"
-                    >
-                      <span>링크 바로가기</span>
-                      <span>&rarr;</span>
-                    </a>
-                  </div>
-                ) : null}
               </div>
             </div>
           </div>
