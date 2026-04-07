@@ -53,7 +53,7 @@ export function Navbar() {
                   />
                 </div>
               </div>
-              <span className="text-[11px] uppercase tracking-[0.22em] text-slate-300 transition group-hover:text-white md:text-xs">
+              <span className="text-xs font-bold uppercase tracking-[0.22em] text-slate-300 transition group-hover:text-white md:text-sm">
                 {item.label}
               </span>
             </a>

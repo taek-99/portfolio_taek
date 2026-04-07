@@ -45,7 +45,7 @@ export function SectionHome() {
           </p>
 
           <p className="text-lg tracking-wide text-slate-400">
-            Designing flows that lead users to action
+            I'm trying to get better
           </p>
         </div>
       </div>

@@ -6,17 +6,48 @@ import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { projects } from "../../data/projects";
 
+type DisplayProject = {
+  id: string;
+  name: string;
+  period: string;
+  team: string;
+  oneLiner: string;
+  accentClass: string;
+  iconSrc?: string;
+  iconAlt?: string;
+};
+
 export function SectionProjects() {
-  const [activeProjectId, setActiveProjectId] = useState(projects[0]?.id);
+  const displayProjects: DisplayProject[] = [
+    ...projects.map((project) => ({
+      id: project.id,
+      name: project.name,
+      period: project.period,
+      team: project.team,
+      oneLiner: project.oneLiner,
+      accentClass: project.accentClass,
+      iconSrc: project.iconSrc,
+      iconAlt: project.iconAlt,
+    })),
+  ];
+
+  const [activeProjectId, setActiveProjectId] = useState(displayProjects[0]?.id);
   const activeProject =
-    projects.find((project) => project.id === activeProjectId) ?? projects[0];
+    displayProjects.find((project) => project.id === activeProjectId) ?? displayProjects[0];
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLAnchorElement | HTMLDivElement | null)[]>([]);
   const overlayRefs = useRef<(HTMLDivElement | null)[]>([]);
   const logoRefs = useRef<(HTMLDivElement | null)[]>([]);
   const titleRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dragStateRef = useRef({
+    isDragging: false,
+    hasMoved: false,
+    pointerId: -1,
+    startX: 0,
+    startScrollLeft: 0,
+  });
 
   useEffect(() => {
     if (!sectionRef.current || !trackRef.current) {
@@ -26,7 +57,6 @@ export function SectionProjects() {
     const ctx = gsap.context(() => {
       gsap.from(trackRef.current?.children ?? [], {
         y: 24,
-        opacity: 0,
         duration: 0.75,
         stagger: 0.08,
         ease: "power3.out",
@@ -43,9 +73,9 @@ export function SectionProjects() {
       gsap.to(card, {
         y: isActive ? -8 : 0,
         scale: isActive ? 1 : 0.96,
-        opacity: isActive ? 1 : 0.62,
-        duration: 0.45,
-        ease: "power3.out",
+        opacity: 1,
+        duration: 0.24,
+        ease: "power2.out",
       });
     });
   }, [activeProjectId]);
@@ -65,34 +95,34 @@ export function SectionProjects() {
     if (isEntering) {
       gsap.to(card, {
         y: -12,
-        scale: 1.02,
-        duration: 0.45,
-        ease: "power3.out",
+        scale: 1.01,
+        duration: 0.22,
+        ease: "power2.out",
         overwrite: true,
       });
 
       gsap.to(overlay, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.35,
-        ease: "power3.out",
+        duration: 0.18,
+        ease: "power2.out",
         overwrite: true,
       });
 
       gsap.to(logo, {
-        scale: 0.82,
-        y: -18,
+        scale: 0.88,
+        y: -12,
         autoAlpha: 0,
-        duration: 0.32,
-        ease: "power3.out",
+        duration: 0.18,
+        ease: "power2.out",
         overwrite: true,
       });
 
       gsap.to(title, {
-        y: -14,
+        y: -10,
         autoAlpha: 0,
-        duration: 0.32,
-        ease: "power3.out",
+        duration: 0.18,
+        ease: "power2.out",
         overwrite: true,
       });
       return;
@@ -103,15 +133,15 @@ export function SectionProjects() {
     gsap.to(card, {
       y: isActive ? -8 : 0,
       scale: isActive ? 1 : 0.96,
-      duration: 0.45,
-      ease: "power3.out",
+      duration: 0.22,
+      ease: "power2.out",
       overwrite: true,
     });
 
     gsap.to(overlay, {
       autoAlpha: 0,
-      y: 8,
-      duration: 0.28,
+      y: 4,
+      duration: 0.16,
       ease: "power2.out",
       overwrite: true,
     });
@@ -120,16 +150,16 @@ export function SectionProjects() {
       scale: 1,
       y: 0,
       autoAlpha: 1,
-      duration: 0.35,
-      ease: "power3.out",
+      duration: 0.18,
+      ease: "power2.out",
       overwrite: true,
     });
 
     gsap.to(title, {
       y: 0,
       autoAlpha: 1,
-      duration: 0.35,
-      ease: "power3.out",
+      duration: 0.18,
+      ease: "power2.out",
       overwrite: true,
     });
   }
@@ -178,17 +208,134 @@ export function SectionProjects() {
     syncProjectFromScroll();
   }
 
+  function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    if (!trackRef.current) {
+      return;
+    }
+
+    dragStateRef.current = {
+      isDragging: true,
+      hasMoved: false,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startScrollLeft: trackRef.current.scrollLeft,
+    };
+  }
+
+  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    if (!trackRef.current || !dragStateRef.current.isDragging) {
+      return;
+    }
+
+    const deltaX = event.clientX - dragStateRef.current.startX;
+    if (!dragStateRef.current.hasMoved && Math.abs(deltaX) < 8) {
+      return;
+    }
+
+    if (!dragStateRef.current.hasMoved) {
+      dragStateRef.current.hasMoved = true;
+      trackRef.current.setPointerCapture(event.pointerId);
+    }
+
+    event.preventDefault();
+    trackRef.current.scrollLeft = dragStateRef.current.startScrollLeft - deltaX;
+    syncProjectFromScroll();
+  }
+
+  function handlePointerUpOrCancel(event: React.PointerEvent<HTMLDivElement>) {
+    if (!trackRef.current || !dragStateRef.current.isDragging) {
+      return;
+    }
+
+    if (
+      dragStateRef.current.hasMoved &&
+      trackRef.current.hasPointerCapture(dragStateRef.current.pointerId)
+    ) {
+      trackRef.current.releasePointerCapture(dragStateRef.current.pointerId);
+    }
+
+    dragStateRef.current = {
+      isDragging: false,
+      hasMoved: false,
+      pointerId: -1,
+      startX: 0,
+      startScrollLeft: 0,
+    };
+  }
+
+  function renderCardBody(project: DisplayProject, index: number) {
+    return (
+      <>
+        <div className={`absolute inset-0 rounded-[36px] bg-gradient-to-br ${project.accentClass}`} />
+
+        <div className="relative flex min-h-[320px] flex-col items-center justify-center gap-8 text-center md:min-h-[420px]">
+          <div
+            ref={(node) => {
+              logoRefs.current[index] = node;
+            }}
+            className="flex items-center justify-center py-2"
+          >
+            <div className="flex h-36 w-36 items-center justify-center rounded-[32px] border border-black/5 bg-white shadow-[0_20px_40px_rgba(2,6,23,0.18)] md:h-52 md:w-52">
+              <Image
+                src={project.iconSrc ?? ""}
+                alt={project.iconAlt ?? project.name}
+                width={136}
+                height={136}
+                className={`object-contain ${
+                  project.name === "See:Sun"
+                    ? "h-28 w-28 md:h-40 md:w-40"
+                    : "h-24 w-24 md:h-36 md:w-36"
+                }`}
+              />
+            </div>
+          </div>
+
+          <div
+            ref={(node) => {
+              titleRefs.current[index] = node;
+            }}
+            className="space-y-3"
+          >
+            <h3 className="text-2xl font-semibold tracking-tight text-slate-950 md:text-3xl">
+              {project.name}
+            </h3>
+            <p className="text-sm font-semibold tracking-[0.14em] text-slate-500 md:text-base">
+              {project.period}
+            </p>
+          </div>
+
+          <div
+            ref={(node) => {
+              overlayRefs.current[index] = node;
+            }}
+            className="pointer-events-none invisible absolute inset-0 flex translate-y-2 flex-col items-center justify-center rounded-[36px] bg-[rgba(255,255,255,0.97)] p-6 text-center opacity-0 md:p-8"
+          >
+            <div className="flex max-w-[18rem] flex-col items-center gap-5 md:max-w-[20rem]">
+              <p className="text-xl font-bold leading-8 text-black md:text-2xl md:leading-9">
+                {project.oneLiner}
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 text-sm font-medium text-black md:text-base">
+                <span className="whitespace-pre-line rounded-[20px] border border-black/10 bg-black/5 px-4 py-2 text-center">
+                  {project.team}
+                </span>
+              </div>
+              <div className="inline-flex items-center gap-2 text-base font-bold text-black md:text-lg">
+                <span>더보기</span>
+                <span>&rarr;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <section id="projects" ref={sectionRef} className="min-h-screen px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-400">
-              Projects
-            </p>
-            <h1 className="text-4xl font-bold text-white md:text-5xl">
-              Select A Project
-            </h1>
+            <h1 className="text-4xl font-bold text-white md:text-5xl">Project</h1>
           </div>
         </div>
 
@@ -196,10 +343,17 @@ export function SectionProjects() {
           ref={trackRef}
           onWheel={handleTrackWheel}
           onScroll={syncProjectFromScroll}
-          className="scrollbar-none -mx-3 flex gap-6 overflow-x-auto px-3 pb-6 pt-4"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUpOrCancel}
+          onPointerCancel={handlePointerUpOrCancel}
+          className="scrollbar-none -mx-3 flex cursor-grab gap-6 overflow-x-auto px-3 pb-6 pt-4 active:cursor-grabbing"
         >
-          {projects.map((project, index) => {
+          {displayProjects.map((project, index) => {
             const isActive = project.id === activeProject.id;
+            const className = `group relative min-w-[260px] rounded-[36px] border border-white/10 bg-slate-950/70 p-6 shadow-[0_22px_48px_rgba(2,6,23,0.36)] transition md:min-w-[340px] md:p-8 ${
+              isActive ? "ring-1 ring-white/20" : ""
+            }`;
 
             return (
               <Link
@@ -219,68 +373,9 @@ export function SectionProjects() {
                   animateCardHover(index, true);
                 }}
                 onBlur={() => animateCardHover(index, false)}
-                className={`group relative min-w-[260px] rounded-[36px] border border-white/10 bg-slate-950/70 p-6 shadow-[0_22px_48px_rgba(2,6,23,0.36)] transition md:min-w-[340px] md:p-8 ${
-                  isActive ? "ring-1 ring-white/20" : ""
-                }`}
+                className={className}
               >
-                <div
-                  className={`absolute inset-0 rounded-[36px] bg-gradient-to-br ${project.accentClass} opacity-85`}
-                />
-
-                <div className="relative flex min-h-[320px] flex-col items-center justify-center gap-8 text-center md:min-h-[420px]">
-                  <div
-                    ref={(node) => {
-                      logoRefs.current[index] = node;
-                    }}
-                    className="flex items-center justify-center py-2"
-                  >
-                    <div className="flex h-36 w-36 items-center justify-center rounded-[32px] border border-white/10 bg-slate-900/90 shadow-[0_20px_40px_rgba(2,6,23,0.4)] md:h-52 md:w-52">
-                      <Image
-                        src={project.iconSrc}
-                        alt={project.iconAlt}
-                        width={136}
-                        height={136}
-                        className="h-24 w-24 object-contain md:h-36 md:w-36"
-                      />
-                    </div>
-                  </div>
-
-                  <div
-                    ref={(node) => {
-                      titleRefs.current[index] = node;
-                    }}
-                    className="space-y-3"
-                  >
-                    <h3 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-                      {project.name}
-                    </h3>
-                  </div>
-
-                  <div
-                    ref={(node) => {
-                      overlayRefs.current[index] = node;
-                    }}
-                    className="pointer-events-none invisible absolute inset-0 flex translate-y-2 flex-col items-center justify-center rounded-[36px] bg-[rgba(255,255,255,0.97)] p-6 text-center opacity-0 md:p-8"
-                  >
-                    <div className="flex max-w-[18rem] flex-col items-center gap-5 md:max-w-[20rem]">
-                      <p className="text-xl font-bold leading-8 text-black md:text-2xl md:leading-9">
-                        {project.oneLiner}
-                      </p>
-                      <div className="flex flex-wrap justify-center gap-3 text-sm font-medium text-black md:text-base">
-                        <span className="whitespace-pre-line rounded-[20px] border border-black/10 bg-black/5 px-4 py-2 text-center">
-                          {project.team}
-                        </span>
-                        <span className="rounded-full border border-black/10 bg-black/5 px-4 py-2">
-                          {project.period}
-                        </span>
-                      </div>
-                      <div className="inline-flex items-center gap-2 text-base font-bold text-black md:text-lg">
-                        <span>더보기</span>
-                        <span>→</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderCardBody(project, index)}
               </Link>
             );
           })}

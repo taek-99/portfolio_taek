@@ -25,9 +25,10 @@ export default function Home() {
 
     function handleIntroDone() {
         hasShownIntroInSession = true;
-        window.history.replaceState(null, "", "#Home");
-        window.scrollTo({ top: 0, behavior: "auto" });
         setShowIntro(false);
+        requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: "auto" });
+        });
     }
 
     return (
