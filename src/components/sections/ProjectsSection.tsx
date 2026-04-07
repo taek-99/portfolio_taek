@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { withBasePath } from "../../lib/site";
 
 type ProjectImage = {
   src: string;
@@ -55,11 +56,11 @@ const projects: Project[] = [
     ],
     images: [
       {
-        src: "/projects/hairddae-main.png",
+        src: withBasePath("/projects/hairddae-main.png"),
         alt: "헤어때 메인 화면",
       },
       {
-        src: "/projects/hairddae-camera.png",
+        src: withBasePath("/projects/hairddae-camera.png"),
         alt: "헤어때 카메라 화면",
       },
     ],
@@ -117,11 +118,11 @@ const projects: Project[] = [
     ],
     images: [
       {
-        src: "/projects/smart-er-ai.jpg",
+        src: withBasePath("/projects/smart-er-ai.jpg"),
         alt: "응급실 추천 서비스 AI 소개 화면",
       },
       {
-        src: "/projects/smart-er-emergency.jpg",
+        src: withBasePath("/projects/smart-er-emergency.jpg"),
         alt: "응급실 추천 서비스 대표 화면",
       },
     ],

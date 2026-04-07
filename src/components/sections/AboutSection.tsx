@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { withBasePath } from "../../lib/site";
 
 type Skill = {
   name: string;
@@ -24,21 +25,21 @@ const skillGroups: SkillGroup[] = [
       {
         name: "JavaScript",
         level: 78,
-        iconSrc: "/techstack/JavaScript.svg",
+        iconSrc: withBasePath("/techstack/JavaScript.svg"),
         description:
           "Vue 기반 프로젝트에서 지도, 추천 결과, 페이지 흐름을 직접 구현했습니다.",
       },
       {
         name: "TypeScript",
         level: 86,
-        iconSrc: "/techstack/TypeScript.svg",
+        iconSrc: withBasePath("/techstack/TypeScript.svg"),
         description:
           "헤어때와 See:Sun에서 타입 안정성을 기반으로 기능 구조를 정리했습니다.",
       },
       {
         name: "Python",
         level: 64,
-        iconSrc: "/techstack/Python.svg",
+        iconSrc: withBasePath("/techstack/Python.svg"),
         description:
           "AI 및 백엔드 협업 맥락에서 데이터 흐름과 기능 연동을 이해하며 활용했습니다.",
       },
@@ -50,21 +51,21 @@ const skillGroups: SkillGroup[] = [
       {
         name: "Next.js",
         level: 82,
-        iconSrc: "/techstack/NextJS.svg",
+        iconSrc: withBasePath("/techstack/NextJS.svg"),
         description:
           "서비스형 UI 구성과 음성 기반 인터랙션 프로젝트를 구현하며 활용했습니다.",
       },
       {
         name: "Vue",
         level: 78,
-        iconSrc: "/techstack/Vue.svg",
+        iconSrc: withBasePath("/techstack/Vue.svg"),
         description:
           "응급실 추천 서비스에서 탐색 흐름과 상세 UI를 직접 구현했습니다.",
       },
       {
         name: "Django",
         level: 58,
-        iconSrc: "/techstack/Django.svg",
+        iconSrc: withBasePath("/techstack/Django.svg"),
         description:
           "프론트엔드 중심 프로젝트에서 API 연동과 서비스 구조를 이해하는 기반으로 다뤘습니다.",
       },
@@ -76,14 +77,14 @@ const skillGroups: SkillGroup[] = [
       {
         name: "React",
         level: 90,
-        iconSrc: "/techstack/React.svg",
+        iconSrc: withBasePath("/techstack/React.svg"),
         description:
           "사용자 흐름 중심 화면 설계와 상태 기반 인터랙션 구현에 가장 익숙합니다.",
       },
       {
         name: "Three.js",
         level: 70,
-        iconSrc: "/techstack/ThreeJS.svg",
+        iconSrc: withBasePath("/techstack/ThreeJS.svg"),
         description:
           "Raycasting 기반 3D 신체 부위 선택 인터랙션과 시각적 피드백을 구현했습니다.",
       },
@@ -95,7 +96,7 @@ const skillGroups: SkillGroup[] = [
       {
         name: "Tailwind CSS",
         level: 88,
-        iconSrc: "/techstack/TailwindCSS.svg",
+        iconSrc: withBasePath("/techstack/TailwindCSS.svg"),
         description:
           "빠른 화면 구성과 일관된 디자인 시스템 정리에 익숙합니다.",
       },
@@ -107,21 +108,21 @@ const skillGroups: SkillGroup[] = [
       {
         name: "Docker",
         level: 60,
-        iconSrc: "/techstack/Docker.svg",
+        iconSrc: withBasePath("/techstack/Docker.svg"),
         description:
           "개발 환경을 맞추고 서비스 실행 흐름을 안정적으로 공유하는 데 활용했습니다.",
       },
       {
         name: "AWS",
         level: 55,
-        iconSrc: "/techstack/AWS-Dark.svg",
+        iconSrc: withBasePath("/techstack/AWS-Dark.svg"),
         description:
           "배포 및 인프라 구조를 이해하고 프로젝트 운영 흐름을 파악하는 데 사용했습니다.",
       },
       {
         name: "Figma",
         level: 72,
-        iconSrc: "/techstack/Figma.svg",
+        iconSrc: withBasePath("/techstack/Figma.svg"),
         description:
           "기획과 디자인 의도를 화면 구조로 옮기기 위한 협업 도구로 익숙하게 사용했습니다.",
       },

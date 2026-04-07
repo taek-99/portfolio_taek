@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "../../lib/site";
 
 export function SectionHome() {
   return (
@@ -57,7 +58,7 @@ export function SectionHome() {
         <div className="flex flex-col items-center justify-center gap-1">
           <div className="relative h-64 w-64 overflow-hidden rounded-full bg-gray-200">
             <Image
-              src="/projects/image.png"
+              src={withBasePath("/projects/image.png")}
               alt="신건하 프로필 사진"
               fill
               className="object-cover"
