@@ -34,7 +34,7 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
       if (fadeTimeout) {
         clearTimeout(fadeTimeout);
       }
-    };
+    };  
   }, [onDone]);
 
   return (
