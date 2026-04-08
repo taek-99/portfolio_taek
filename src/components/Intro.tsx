@@ -19,6 +19,7 @@ declare global {
 
 export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
   const [displayed, setDisplayed] = useState("");
+  const [threeReady, setThreeReady] = useState(false);
   const [scriptsReady, setScriptsReady] = useState(false);
   const [canProceed, setCanProceed] = useState(false);
   const [isLaunching, setIsLaunching] = useState(false);
@@ -290,12 +291,15 @@ export default function IntroOverlay({ onDone }: { onDone?: () => void }) {
       <Script
         src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
         strategy="afterInteractive"
+        onLoad={() => setThreeReady(true)}
       />
-      <Script
-        src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds2.min.js"
-        strategy="afterInteractive"
-        onLoad={() => setScriptsReady(true)}
-      />
+      {threeReady ? (
+        <Script
+          src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds2.min.js"
+          strategy="afterInteractive"
+          onLoad={() => setScriptsReady(true)}
+        />
+      ) : null}
       <div
         ref={rootRef}
         role="button"
