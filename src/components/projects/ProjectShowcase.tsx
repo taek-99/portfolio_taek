@@ -11,6 +11,19 @@ const troubleshootingByProjectId: Record<
   string,
   { title: string; summary: string; details: string[] }[]
 > = {
+  retinafit: [
+    {
+      title: "3D 안경 모델 로딩 최적화",
+      summary:
+        "AR 피팅에 사용되는 3D 안경 모델의 파일 용량으로 초기 로딩이 길어지는 문제를 Draco 압축과 로딩 흐름 정리로 개선했습니다.",
+      details: [
+        "AR 피팅 화면 진입 시 3D 안경 모델 용량이 커 초기 로딩 시간이 길어지는 문제가 있었습니다.",
+        "GLB 모델에 Draco 압축을 적용해 3D 에셋 용량을 최적화했습니다.",
+        "불필요한 리소스를 정리하고, 웹과 Native AR 영역에서 동일한 모델 경로를 안정적으로 불러오도록 로딩 흐름을 개선했습니다.",
+        "압축 적용 후 3D 모델 용량을 약 60% 감소시켜 안경 선택 후 AR 피팅 화면으로 전환되는 흐름을 더 안정적으로 만들었습니다.",
+      ],
+    },
+  ],
   hairddae: [
     {
       title: "실시간 통신 성능 이슈",
@@ -77,6 +90,24 @@ const contributionRolesByProjectId: Record<
   string,
   { title: string; details: string[] }[]
 > = {
+  retinafit: [
+    {
+      title: "1. 얼굴 분석 결과 및 추천 화면 구현",
+      details: [
+        "촬영 결과를 바탕으로 얼굴형, 피부 톤, 측정값, 추천 색상, 추천 안경 형태를 보여주는 결과 화면을 구성했습니다.",
+        "분석 결과는 캡처 이미지 업로드와 함께 저장되도록 연결했습니다.",
+        "얼굴 분석 결과가 추천 및 피팅 단계로 자연스럽게 이어지도록 화면 플로우를 설계했습니다.",
+      ],
+    },
+    {
+      title: "2. AR 가상 피팅 및 Flutter 브리지 구현",
+      details: [
+        "Svelte 웹에서 Flutter WebView 브리지를 통해 Native AR 피팅을 실행할 수 있도록 연동했습니다.",
+        "안경 3D 에셋 경로와 원격 모델 URL을 처리하는 브리지 레이어를 구성해 다양한 안경 데이터를 대응할 수 있도록 구현했습니다.",
+        "Native AR 사용이 어려운 환경에서는 Three.js 기반 fallback 화면으로 동일한 흐름을 유지하도록 구성했습니다.",
+      ],
+    },
+  ],
   hairddae: [
     {
       title: "1. 실시간 헤어 피팅 카메라 기능 구현",
@@ -144,6 +175,13 @@ const mediaByProjectId: Record<
     heroImage?: { src: string; alt: string };
   }
 > = {
+  retinafit: {
+    videoSrc: withBasePath("/projects/레티나핏 시연영상.mp4"),
+    heroImage: {
+      src: withBasePath("/projects/ChatGPT Image 2026년 6월 4일 오후 06_55_00.png"),
+      alt: "RETINAFIT 실시간 얼굴 분석과 AR 안경 피팅 서비스 화면",
+    },
+  },
   hairddae: {
     repository: "https://lab.ssafy.com/s14-ai-image-sub1/S14P21M101",
     videoSrc: withBasePath("/projects/헤어때 시연영상.mp4"),

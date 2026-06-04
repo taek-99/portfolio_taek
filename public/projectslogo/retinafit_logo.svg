@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="RETINAFIT logo">
+  <rect width="240" height="240" rx="42" fill="#fff7ed"/>
+  <g fill="none" stroke="#df6b24" stroke-width="10" stroke-linecap="round">
+    <path d="M58 88V62h26"/>
+    <path d="M156 62h26v26"/>
+    <path d="M182 152v26h-26"/>
+    <path d="M84 178H58v-26"/>
+    <path d="M120 88v64"/>
+    <path d="M88 120h64"/>
+  </g>
+  <text x="120" y="214" text-anchor="middle" fill="#df6b24" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">RETINA FIT</text>
+</svg>

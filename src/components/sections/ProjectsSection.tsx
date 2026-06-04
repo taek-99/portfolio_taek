@@ -41,13 +41,6 @@ export function SectionProjects() {
   const overlayRefs = useRef<(HTMLDivElement | null)[]>([]);
   const logoRefs = useRef<(HTMLDivElement | null)[]>([]);
   const titleRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const dragStateRef = useRef({
-    isDragging: false,
-    hasMoved: false,
-    pointerId: -1,
-    startX: 0,
-    startScrollLeft: 0,
-  });
 
   useEffect(() => {
     if (!sectionRef.current || !trackRef.current) {
@@ -164,103 +157,28 @@ export function SectionProjects() {
     });
   }
 
-  function syncProjectFromScroll() {
-    if (!trackRef.current) {
+  function moveProject(direction: -1 | 1) {
+    if (!trackRef.current || displayProjects.length === 0) {
       return;
     }
 
-    const track = trackRef.current;
-    const center = track.scrollLeft + track.clientWidth / 2;
+    const currentIndex = Math.max(
+      0,
+      displayProjects.findIndex((project) => project.id === activeProjectId),
+    );
+    const nextIndex = Math.min(displayProjects.length - 1, Math.max(0, currentIndex + direction));
+    const nextProject = displayProjects[nextIndex];
+    const nextCard = cardRefs.current[nextIndex];
 
-    let closestId = activeProjectId;
-    let closestDistance = Number.POSITIVE_INFINITY;
+    if (!nextProject || !nextCard) {
+      return;
+    }
 
-    cardRefs.current.forEach((card) => {
-      if (!card?.dataset.projectId) {
-        return;
-      }
-
-      const cardCenter = card.offsetLeft + card.clientWidth / 2;
-      const distance = Math.abs(center - cardCenter);
-
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestId = card.dataset.projectId;
-      }
+    setActiveProjectId(nextProject.id);
+    trackRef.current.scrollTo({
+      left: nextCard.offsetLeft - (trackRef.current.clientWidth - nextCard.clientWidth) / 2,
+      behavior: "smooth",
     });
-
-    if (closestId && closestId !== activeProjectId) {
-      setActiveProjectId(closestId);
-    }
-  }
-
-  function handleTrackWheel(event: React.WheelEvent<HTMLDivElement>) {
-    if (!trackRef.current) {
-      return;
-    }
-
-    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
-      return;
-    }
-
-    event.preventDefault();
-    trackRef.current.scrollLeft += event.deltaY;
-    syncProjectFromScroll();
-  }
-
-  function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
-    if (!trackRef.current) {
-      return;
-    }
-
-    dragStateRef.current = {
-      isDragging: true,
-      hasMoved: false,
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      startScrollLeft: trackRef.current.scrollLeft,
-    };
-  }
-
-  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
-    if (!trackRef.current || !dragStateRef.current.isDragging) {
-      return;
-    }
-
-    const deltaX = event.clientX - dragStateRef.current.startX;
-    if (!dragStateRef.current.hasMoved && Math.abs(deltaX) < 8) {
-      return;
-    }
-
-    if (!dragStateRef.current.hasMoved) {
-      dragStateRef.current.hasMoved = true;
-      trackRef.current.setPointerCapture(event.pointerId);
-    }
-
-    event.preventDefault();
-    trackRef.current.scrollLeft = dragStateRef.current.startScrollLeft - deltaX;
-    syncProjectFromScroll();
-  }
-
-  function handlePointerUpOrCancel(event: React.PointerEvent<HTMLDivElement>) {
-    if (!trackRef.current || !dragStateRef.current.isDragging) {
-      return;
-    }
-
-    if (
-      dragStateRef.current.hasMoved &&
-      trackRef.current.hasPointerCapture(dragStateRef.current.pointerId)
-    ) {
-      trackRef.current.releasePointerCapture(dragStateRef.current.pointerId);
-    }
-
-    dragStateRef.current = {
-      isDragging: false,
-      hasMoved: false,
-      pointerId: -1,
-      startX: 0,
-      startScrollLeft: 0,
-    };
   }
 
   function renderCardBody(project: DisplayProject, index: number) {
@@ -341,13 +259,7 @@ export function SectionProjects() {
 
         <div
           ref={trackRef}
-          onWheel={handleTrackWheel}
-          onScroll={syncProjectFromScroll}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUpOrCancel}
-          onPointerCancel={handlePointerUpOrCancel}
-          className="scrollbar-none -mx-2 flex cursor-grab gap-4 overflow-x-auto px-2 pb-6 pt-4 active:cursor-grabbing sm:-mx-3 sm:gap-6 sm:px-3"
+          className="scrollbar-none -mx-2 flex gap-4 overflow-hidden px-2 pb-6 pt-4 sm:-mx-3 sm:gap-6 sm:px-3"
         >
           {displayProjects.map((project, index) => {
             const isActive = project.id === activeProject.id;
@@ -379,6 +291,27 @@ export function SectionProjects() {
               </Link>
             );
           })}
+        </div>
+
+        <div className="mt-4 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={() => moveProject(-1)}
+            disabled={activeProject?.id === displayProjects[0]?.id}
+            aria-label="이전 프로젝트"
+            className="flex h-13 w-16 items-center justify-center rounded-full border border-sky-200/70 bg-sky-400 text-2xl font-black text-slate-950 shadow-[0_14px_32px_rgba(56,189,248,0.32)] transition hover:border-white hover:bg-sky-300 hover:shadow-[0_18px_42px_rgba(56,189,248,0.45)] disabled:cursor-not-allowed disabled:border-white/10 disabled:bg-slate-700 disabled:text-slate-400 disabled:shadow-none disabled:opacity-45"
+          >
+            &larr;
+          </button>
+          <button
+            type="button"
+            onClick={() => moveProject(1)}
+            disabled={activeProject?.id === displayProjects[displayProjects.length - 1]?.id}
+            aria-label="다음 프로젝트"
+            className="flex h-13 w-16 items-center justify-center rounded-full border border-sky-200/70 bg-sky-400 text-2xl font-black text-slate-950 shadow-[0_14px_32px_rgba(56,189,248,0.32)] transition hover:border-white hover:bg-sky-300 hover:shadow-[0_18px_42px_rgba(56,189,248,0.45)] disabled:cursor-not-allowed disabled:border-white/10 disabled:bg-slate-700 disabled:text-slate-400 disabled:shadow-none disabled:opacity-45"
+          >
+            &rarr;
+          </button>
         </div>
       </div>
     </section>

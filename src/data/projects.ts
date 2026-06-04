@@ -33,6 +33,33 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: "retinafit",
+    name: "RETINAFIT",
+    iconSrc: withBasePath("/projectslogo/retinafit_logo.svg"),
+    iconAlt: "RETINAFIT 로고",
+    period: "2026.04 - 2026.05",
+    team: "7인 프로젝트\nFE 2 / BE 1 / AI 3 / INF 1",
+    category: "B2B AR Glasses Fitting Service",
+    summary:
+      "안경점 현장에서 얼굴 분석부터 AR 가상 피팅까지 연결해, 고객 상담과 안경 추천 흐름을 지원하는 B2B 웹 서비스",
+    oneLiner: "실시간 얼굴 분석과\nAR 안경 피팅\n서비스",
+    outcome:
+      "얼굴 측정, 추천 결과, AR 피팅, 최종 리포트까지 이어지는 안경점 상담 흐름을 하나의 웹 경험으로 구성했습니다.",
+    accentClass: "from-orange-100 via-amber-50 to-white",
+    panelClass: "bg-[linear-gradient(135deg,#fff7ed_0%,#ffedd5_45%,#ffffff_100%)]",
+    features: [
+      "실시간 얼굴 분석과 측정 결과 시각화",
+      "Flutter WebView 브리지 기반 Native AR 안경 피팅",
+      "얼굴형, 피부 톤, 추천 프레임을 담은 최종 분석 리포트",
+    ],
+    contributions: [
+      "촬영 결과 기반 얼굴 분석 결과 및 추천 화면 구현",
+      "Svelte 웹과 Flutter WebView 브리지 기반 AR 피팅 연동",
+      "Three.js fallback 화면과 3D 안경 모델 로딩 흐름 개선",
+    ],
+    stack: ["Svelte", "Flutter", "JavaScript", "Tailwind CSS", "Three.js"],
+  },
+  {
     id: "hairddae",
     name: "헤어때",
     iconSrc: withBasePath("/projectslogo/hairddae_logo.png"),
