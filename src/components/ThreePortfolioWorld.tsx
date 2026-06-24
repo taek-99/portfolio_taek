@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { withBasePath } from "../lib/site";
 
 type KeyState = {
   forward: boolean;
@@ -79,6 +80,29 @@ const destinations: Destination[] = [
     color: "#7c3aed",
     roofColor: "#a855f7",
     position: [8.5, 0, 13],
+  },
+];
+
+const awardExhibits = [
+  {
+    title: "SSAFY 특화 프로젝트 1위",
+    date: "2026.04.03",
+    imageSrc: withBasePath("/awards/IMG_8715.JPG"),
+  },
+  {
+    title: "싸피레이스 맵 1위",
+    date: "2026.01.09",
+    imageSrc: withBasePath("/awards/rn_image_picker_lib_temp_1b7c3b07-111d-46ae-bbe8-f77ba11f4eb6 (1).jpg"),
+  },
+  {
+    title: "배틀싸피 전국 1위",
+    date: "2025.10.02",
+    imageSrc: withBasePath("/awards/image (41).png"),
+  },
+  {
+    title: "전국 기능경기대회 1위",
+    date: "2017.09.11",
+    imageSrc: withBasePath("/awards/PHOTO_0295.JPG"),
   },
 ];
 
@@ -432,6 +456,121 @@ function makeDestinationHouse(destination: Destination) {
   return house;
 }
 
+function makeAwardLabelTexture(title: string, date: string) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1024;
+  canvas.height = 256;
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    throw new Error("Canvas rendering context is not available.");
+  }
+
+  context.fillStyle = "#111827";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.strokeStyle = "#f59e0b";
+  context.lineWidth = 10;
+  context.strokeRect(22, 22, canvas.width - 44, canvas.height - 44);
+  context.fillStyle = "#fef3c7";
+  context.font = "800 62px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText(title, canvas.width / 2, 100, 900);
+  context.fillStyle = "#fbbf24";
+  context.font = "700 42px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+  context.fillText(date, canvas.width / 2, 178);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 8;
+  return texture;
+}
+
+function makeAwardsBoard(textureLoader: THREE.TextureLoader) {
+  const board = new THREE.Group();
+  board.name = "awards-exhibit-board";
+  board.position.set(-14.2, 0, 8.6);
+  board.rotation.y = -0.55;
+
+  const frameMaterial = makeMaterial("#5b341b", 0.74);
+  const backingMaterial = makeMaterial("#1f2937", 0.8);
+
+  const backing = new THREE.Mesh(new THREE.BoxGeometry(7.6, 4.35, 0.18), backingMaterial);
+  backing.position.y = 2.65;
+  backing.castShadow = true;
+  backing.receiveShadow = true;
+  board.add(backing);
+
+  const topFrame = new THREE.Mesh(new THREE.BoxGeometry(7.95, 0.18, 0.28), frameMaterial);
+  topFrame.position.set(0, 4.92, 0.08);
+  topFrame.castShadow = true;
+  board.add(topFrame);
+
+  const bottomFrame = topFrame.clone();
+  bottomFrame.position.y = 0.38;
+  board.add(bottomFrame);
+
+  const sideFrameGeometry = new THREE.BoxGeometry(0.18, 4.7, 0.28);
+  const leftFrame = new THREE.Mesh(sideFrameGeometry, frameMaterial);
+  leftFrame.position.set(-4.05, 2.65, 0.08);
+  leftFrame.castShadow = true;
+  board.add(leftFrame);
+
+  const rightFrame = leftFrame.clone();
+  rightFrame.position.x = 4.05;
+  board.add(rightFrame);
+
+  const postGeometry = new THREE.CylinderGeometry(0.09, 0.12, 2.05, 14);
+  [-3.45, 3.45].forEach((x) => {
+    const post = new THREE.Mesh(postGeometry, frameMaterial);
+    post.position.set(x, 0.35, -0.02);
+    post.castShadow = true;
+    board.add(post);
+  });
+
+  const titleTexture = makeAwardLabelTexture("수상 이력 전시관", "Awards Gallery");
+  const title = new THREE.Mesh(
+    new THREE.BoxGeometry(3.9, 0.62, 0.08),
+    new THREE.MeshStandardMaterial({ map: titleTexture, roughness: 0.55 }),
+  );
+  title.position.set(0, 4.38, 0.16);
+  title.userData.texture = titleTexture;
+  board.add(title);
+
+  const cardPositions: Array<[number, number]> = [
+    [-2.05, 3.13],
+    [2.05, 3.13],
+    [-2.05, 1.55],
+    [2.05, 1.55],
+  ];
+
+  awardExhibits.forEach((award, index) => {
+    const [x, y] = cardPositions[index];
+    const photoTexture = textureLoader.load(award.imageSrc);
+    photoTexture.colorSpace = THREE.SRGBColorSpace;
+    photoTexture.anisotropy = 8;
+
+    const photo = new THREE.Mesh(
+      new THREE.BoxGeometry(1.55, 0.98, 0.08),
+      new THREE.MeshStandardMaterial({ map: photoTexture, roughness: 0.48 }),
+    );
+    photo.position.set(x, y, 0.18);
+    photo.userData.texture = photoTexture;
+    board.add(photo);
+
+    const labelTexture = makeAwardLabelTexture(award.title, award.date);
+    const label = new THREE.Mesh(
+      new THREE.BoxGeometry(1.72, 0.42, 0.06),
+      new THREE.MeshStandardMaterial({ map: labelTexture, roughness: 0.55 }),
+    );
+    label.position.set(x, y - 0.72, 0.18);
+    label.userData.texture = labelTexture;
+    board.add(label);
+  });
+
+  return board;
+}
+
 function makeDirtPath(destination: Destination) {
   const plazaRadius = 2.32;
   const houseSetback = 2.48;
@@ -692,6 +831,7 @@ export function ThreePortfolioWorld() {
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.domElement.style.touchAction = "none";
     mount.appendChild(renderer.domElement);
+    const textureLoader = new THREE.TextureLoader();
 
     const sky = makeSkyDome();
     const visualSun = makeSun();
@@ -735,28 +875,6 @@ export function ThreePortfolioWorld() {
     ground.receiveShadow = true;
     scene.add(ground);
 
-    const grid = new THREE.GridHelper(90, 90, "#7bbf66", "#376b3d");
-    grid.position.y = 0.012;
-    scene.add(grid);
-
-    const horizon = new THREE.Mesh(
-      new THREE.RingGeometry(15, 15.12, 128),
-      new THREE.MeshBasicMaterial({ color: "#38bdf8", transparent: true, opacity: 0.38, side: THREE.DoubleSide }),
-    );
-    horizon.rotation.x = -Math.PI / 2;
-    horizon.position.y = 0.04;
-    scene.add(horizon);
-
-    const markerMaterial = makeMaterial("#f8fafc", 0.5);
-    for (let i = 0; i < 16; i += 1) {
-      const angle = (i / 16) * Math.PI * 2;
-      const marker = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.14, 0.14), markerMaterial);
-      marker.position.set(Math.cos(angle) * 10, 0.07, Math.sin(angle) * 10);
-      marker.rotation.y = angle;
-      marker.castShadow = true;
-      scene.add(marker);
-    }
-
     const destinationEntries = destinations.map((destination) => {
       scene.add(makeDirtPath(destination));
 
@@ -770,6 +888,7 @@ export function ThreePortfolioWorld() {
     });
 
     scene.add(makeCenterDirtPlaza());
+    scene.add(makeAwardsBoard(textureLoader));
 
     const signpost = makeSignpost();
     signpost.position.set(0, 0, 0);
