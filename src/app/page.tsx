@@ -1,52 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Navbar } from "../components/Navbar";
-import { SectionAbout } from "../components/sections/AboutSection";
-import { SectionContact } from "../components/sections/ContactSection";
 import { SectionHome } from "../components/sections/HomeSection";
-import { SectionProjects } from "../components/sections/ProjectsSection";
-import { useEffect, useState } from "react";
 
 export default function Home() {
-  const router = useRouter();
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    const hasSeenIntro = window.sessionStorage.getItem("hasSeenIntro");
-
-    if (!hasSeenIntro) {
-      router.replace("/intro");
-      return;
-    }
-
-    setIsReady(true);
-  }, [router]);
-
-  useEffect(() => {
-    if (!isReady) {
-      return;
-    }
-
-    const hash = window.location.hash;
-    if (!hash) {
-      return;
-    }
-
-    const target = document.querySelector(hash);
-    if (!target) {
-      return;
-    }
-
-    requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: "auto", block: "start" });
-    });
-  }, [isReady]);
-
-  if (!isReady) {
-    return null;
-  }
-
   return (
     <div className="relative">
       <div
@@ -67,12 +24,7 @@ export default function Home() {
 
       <main className="relative min-h-screen">
         <Navbar />
-        <div className="mx-auto w-full max-w-[1400px] px-4 md:px-8 lg:px-12">
-          <SectionHome />
-          <SectionAbout />
-          <SectionProjects />
-          <SectionContact />
-        </div>
+        <SectionHome />
       </main>
     </div>
   );
